@@ -1,2 +1,3 @@
-# animation-spike
-Spike test about animating draggable items in React Native
+# Animation Spike Test
+
+Spike test about animating draggable items in React Native.

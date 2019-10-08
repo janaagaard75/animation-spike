@@ -1,0 +1,10 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "javascript.validate.enable": false,
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

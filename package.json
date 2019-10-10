@@ -6,7 +6,9 @@
     "check-types": "tsc",
     "eject": "expo eject",
     "ios": "expo start --ios",
+    "lint": "eslint --format codeframe \"**/*.tsx\"",
     "start": "expo start",
+    "validate": "yarn install --frozen-lockfile && yarn run lint && yarn run check-types",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -19,7 +21,13 @@
   "devDependencies": {
     "@types/react": "16.8.25",
     "@types/react-native": "0.60.19",
+    "@typescript-eslint/eslint-plugin": "2.3.3",
+    "@typescript-eslint/parser": "2.3.3",
     "babel-preset-expo": "7.0.0",
+    "eslint": "6.5.1",
+    "eslint-config-prettier": "6.4.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "eslint-plugin-react": "7.16.0",
     "expo-cli": "3.2.3",
     "typescript": "3.6.3"
   }

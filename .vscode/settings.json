@@ -1,7 +1,10 @@
 {
   "cSpell.words": [
     "Interop",
-    "esnext"
+    "codeframe",
+    "esnext",
+    "lockfile",
+    "readonly"
   ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": true

@@ -3,6 +3,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "android": "expo start --android",
+    "check-types": "tsc",
     "eject": "expo eject",
     "ios": "expo start --ios",
     "start": "expo start",

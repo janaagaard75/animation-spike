@@ -1,5 +1,8 @@
 {
-  "cSpell.words": ["esnext"],
+  "cSpell.words": [
+    "Interop",
+    "esnext"
+  ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },

@@ -8,14 +8,6 @@ interface Props {
 }
 
 export class PositionedSquare extends Component<Props> {
-  public constructor(props: Props) {
-    super(props)
-
-    this.state = {
-      squarePosition: Position.BottomRight
-    }
-  }
-
   public render() {
     return (
       <View

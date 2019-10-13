@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { View } from "react-native"
-import { Squares } from "./Squares"
+import { PositionedSquare } from "./PositionedSquare"
 
 export class MainView extends Component {
   public render() {
@@ -13,7 +13,7 @@ export class MainView extends Component {
           justifyContent: "center"
         }}
       >
-        <Squares />
+        <PositionedSquare />
       </View>
     )
   }

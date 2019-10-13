@@ -5,6 +5,7 @@
     "android": "expo start --android",
     "check-types": "tsc",
     "eject": "expo eject",
+    "format": "yarn install --frozen-lockfile && prettier --write \"**/*.ts\" \"**/*.tsx\" \"*.js\" \"*.json\" \"*.ts\"",
     "ios": "expo start --ios",
     "lint": "eslint --format codeframe \"**/*.tsx\"",
     "start": "expo start",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "3.1.1",
     "eslint-plugin-react": "7.16.0",
     "expo-cli": "3.3.0",
+    "prettier": "1.18.2",
     "typescript": "3.6.4"
   }
 }

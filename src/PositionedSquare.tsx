@@ -1,20 +1,14 @@
 import React, { Component } from "react"
 import { View, ViewStyle } from "react-native"
+import { Position } from "./Position"
 import { Square } from "./Square"
 
-enum Position {
-  BottomLeft,
-  BottomRight,
-  TopLeft,
-  TopRight
-}
-
-interface State {
+interface Props {
   squarePosition: Position
 }
 
-export class PositionedSquare extends Component<{}, State> {
-  public constructor(props: {}) {
+export class PositionedSquare extends Component<Props> {
+  public constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -31,7 +25,7 @@ export class PositionedSquare extends Component<{}, State> {
             height: 300,
             width: 300
           },
-          PositionedSquare.getPositionStyle(this.state.squarePosition)
+          PositionedSquare.getPositionStyle(this.props.squarePosition)
         ]}
       >
         <Square />

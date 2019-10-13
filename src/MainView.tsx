@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { View } from "react-native"
+import { Button, View } from "react-native"
+import { Position } from "./Position"
 import { PositionedSquare } from "./PositionedSquare"
 
 export class MainView extends Component {
@@ -13,7 +14,14 @@ export class MainView extends Component {
           justifyContent: "center"
         }}
       >
-        <PositionedSquare />
+        <PositionedSquare squarePosition={Position.BottomLeft} />
+        <View
+          style={{
+            marginTop: 40
+          }}
+        >
+          <Button onPress={() => {}} title="Move square" />
+        </View>
       </View>
     )
   }

@@ -43,8 +43,8 @@ export class PositionedSquare extends Component<{}, State> {
     switch (position) {
       case Position.BottomLeft:
         return {
-          alignItems: "flex-end",
-          justifyContent: "flex-start"
+          alignItems: "flex-start",
+          justifyContent: "flex-end"
         }
 
       case Position.BottomRight:
@@ -61,8 +61,8 @@ export class PositionedSquare extends Component<{}, State> {
 
       case Position.TopRight:
         return {
-          alignItems: "flex-start",
-          justifyContent: "flex-end"
+          alignItems: "flex-end",
+          justifyContent: "flex-start"
         }
     }
   }

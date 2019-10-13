@@ -3,7 +3,19 @@ import { Button, View } from "react-native"
 import { Position } from "./Position"
 import { PositionedSquare } from "./PositionedSquare"
 
-export class MainView extends Component {
+interface State {
+  squarePosition: Position
+}
+
+export class MainView extends Component<{}, State> {
+  public constructor(props: {}) {
+    super(props)
+
+    this.state = {
+      squarePosition: Position.TopLeft
+    }
+  }
+
   public render() {
     return (
       <View
@@ -14,15 +26,29 @@ export class MainView extends Component {
           justifyContent: "center"
         }}
       >
-        <PositionedSquare squarePosition={Position.BottomLeft} />
+        <PositionedSquare squarePosition={this.state.squarePosition} />
         <View
           style={{
             marginTop: 40
           }}
         >
-          <Button onPress={() => {}} title="Move square" />
+          <Button onPress={() => this.moveSquare()} title="Move square" />
         </View>
       </View>
     )
+  }
+
+  private moveSquare() {
+    this.setState({
+      squarePosition: MainView.getRandomPosition()
+    })
+  }
+
+  private static getRandomPosition(): Position {
+    return MainView.getRandomInteger(0, 3)
+  }
+
+  private static getRandomInteger(minimum: number, maximum: number): number {
+    return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
   }
 }

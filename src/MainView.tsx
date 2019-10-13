@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import { View, ViewStyle } from "react-native"
 
 const containerStyles: ViewStyle = {
@@ -21,10 +21,12 @@ const Square = () => {
   )
 }
 
-export default function App() {
-  return (
-    <View style={containerStyles}>
-      <Square />
-    </View>
-  )
+export default class MainView extends Component {
+  public render() {
+    return (
+      <View style={containerStyles}>
+        <Square />
+      </View>
+    )
+  }
 }

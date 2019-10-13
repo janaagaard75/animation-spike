@@ -1,4 +1,10 @@
 {
+  "name": "animation-spike",
+  "author": {
+    "email": "jan@aagaard.net",
+    "name": "Jan Aagaard"
+  },
+  "license": "MIT",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {

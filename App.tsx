@@ -1,5 +1,5 @@
 import React from "react"
-import { Text, View, ViewStyle } from "react-native"
+import { View, ViewStyle } from "react-native"
 
 const containerStyles: ViewStyle = {
   alignItems: "center",
@@ -8,10 +8,23 @@ const containerStyles: ViewStyle = {
   justifyContent: "center"
 }
 
+const Square = () => {
+  return (
+    <View
+      style={{
+        backgroundColor: "red",
+        borderRadius: 5,
+        height: 100,
+        width: 100
+      }}
+    ></View>
+  )
+}
+
 export default function App() {
   return (
     <View style={containerStyles}>
-      <Text>Open up App.tsx to start working on your app.</Text>
+      <Square />
     </View>
   )
 }

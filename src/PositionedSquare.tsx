@@ -4,7 +4,7 @@ import { fieldSize, squareSize } from "./constants"
 import { Position } from "./Position"
 import { Square } from "./Square"
 
-const getPositionXY = (position: Position): { x: number; y: number } => {
+const toCoordinates = (position: Position): { x: number; y: number } => {
   switch (position) {
     case Position.BottomLeft:
       return {
@@ -38,12 +38,12 @@ interface Props {
 
 export const PositionedSquare = (props: Props) => {
   const [animatedPosition] = useState(
-    new Animated.ValueXY(getPositionXY(props.destination))
+    new Animated.ValueXY(toCoordinates(props.destination))
   )
 
   useEffect(() => {
     Animated.timing(animatedPosition, {
-      toValue: getPositionXY(props.destination),
+      toValue: toCoordinates(props.destination),
       duration: 1000
     }).start()
   })

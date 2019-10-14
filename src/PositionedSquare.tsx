@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Animated } from "react-native"
+import { fieldSize, squareSize } from "./constants"
 import { Position } from "./Position"
 import { Square } from "./Square"
 
@@ -8,13 +9,13 @@ const getPositionXY = (position: Position): { x: number; y: number } => {
     case Position.BottomLeft:
       return {
         x: 0,
-        y: 300 - 100
+        y: fieldSize - squareSize
       }
 
     case Position.BottomRight:
       return {
-        x: 300 - 100,
-        y: 300 - 100
+        x: fieldSize - squareSize,
+        y: fieldSize - squareSize
       }
 
     case Position.TopLeft:
@@ -25,7 +26,7 @@ const getPositionXY = (position: Position): { x: number; y: number } => {
 
     case Position.TopRight:
       return {
-        x: 300 - 100,
+        x: fieldSize - squareSize,
         y: 0
       }
   }
@@ -52,9 +53,9 @@ export const PositionedSquare = (props: Props) => {
       style={[
         {
           display: "flex",
-          height: 300,
+          height: fieldSize,
           transform: animatedPosition.getTranslateTransform(),
-          width: 300
+          width: fieldSize
         }
       ]}
     >

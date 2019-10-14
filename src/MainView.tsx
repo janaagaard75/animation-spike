@@ -34,7 +34,7 @@ const getPositionName = (position: Position) => {
 }
 
 export const MainView = () => {
-  const [squarePosition, setSquarePosition] = useState(Position.TopLeft)
+  const [squarePosition, setSquarePosition] = useState(getRandomPosition())
 
   return (
     <View

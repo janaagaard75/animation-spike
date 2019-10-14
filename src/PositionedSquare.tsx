@@ -25,7 +25,7 @@ const getPositionXY = (position: Position): { x: number; y: number } => {
 
     case Position.TopRight:
       return {
-        x: 0,
+        x: 300 - 100,
         y: 0
       }
   }

@@ -40,8 +40,17 @@ export class MainView extends Component<{}, State> {
 
   private moveSquare() {
     this.setState({
-      squarePosition: MainView.getRandomPosition()
+      squarePosition: MainView.getNewRandomPosition(this.state.squarePosition)
     })
+  }
+
+  private static getNewRandomPosition(currentPosition: Position): Position {
+    for (;;) {
+      const newPosition = this.getRandomPosition()
+      if (newPosition !== currentPosition) {
+        return newPosition
+      }
+    }
   }
 
   private static getRandomPosition(): Position {

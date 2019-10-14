@@ -52,7 +52,6 @@ export const PositionedSquare = (props: Props) => {
     <Animated.View
       style={[
         {
-          display: "flex",
           height: fieldSize,
           transform: animatedPosition.getTranslateTransform(),
           width: fieldSize

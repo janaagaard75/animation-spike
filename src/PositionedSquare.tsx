@@ -1,8 +1,9 @@
-import React from "react"
-import { View, ViewStyle } from "react-native"
+import React, { useEffect, useState } from "react"
+import { Animated, ViewStyle } from "react-native"
 import { Position } from "./Position"
 import { Square } from "./Square"
 
+// TODO: Replace with absolution values, since this is how animations work.
 const getPositionStyle = (position: Position): ViewStyle => {
   switch (position) {
     case Position.BottomLeft:
@@ -36,18 +37,28 @@ interface Props {
 }
 
 export const PositionedSquare = (props: Props) => {
+  const [animatedPosition] = useState(new Animated.ValueXY({ x: 0, y: 0 }))
+
+  useEffect(() => {
+    Animated.timing(animatedPosition, {
+      toValue: { x: 100, y: 100 },
+      duration: 1000
+    }).start()
+  })
+
   return (
-    <View
+    <Animated.View
       style={[
         {
           display: "flex",
           height: 300,
+          transform: animatedPosition.getTranslateTransform(),
           width: 300
         },
         getPositionStyle(props.destination)
       ]}
     >
       <Square />
-    </View>
+    </Animated.View>
   )
 }

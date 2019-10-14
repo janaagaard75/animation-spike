@@ -26,7 +26,7 @@ export class MainView extends Component<{}, State> {
           justifyContent: "center"
         }}
       >
-        <PositionedSquare squarePosition={this.state.squarePosition} />
+        <PositionedSquare destination={this.state.squarePosition} />
         <View
           style={{
             marginTop: 40

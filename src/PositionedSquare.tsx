@@ -4,7 +4,7 @@ import { Position } from "./Position"
 import { Square } from "./Square"
 
 interface Props {
-  squarePosition: Position
+  destination: Position
 }
 
 export class PositionedSquare extends Component<Props> {
@@ -17,7 +17,7 @@ export class PositionedSquare extends Component<Props> {
             height: 300,
             width: 300
           },
-          PositionedSquare.getPositionStyle(this.props.squarePosition)
+          PositionedSquare.getPositionStyle(this.props.destination)
         ]}
       >
         <Square />

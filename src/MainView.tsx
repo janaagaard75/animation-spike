@@ -3,6 +3,14 @@ import { Button, View } from "react-native"
 import { Position } from "./Position"
 import { PositionedSquare } from "./PositionedSquare"
 
+const getRandomInteger = (minimum: number, maximum: number): number => {
+  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
+}
+
+const getRandomPosition = (): Position => {
+  return getRandomInteger(0, 3)
+}
+
 const getNewRandomPosition = (currentPosition: Position): Position => {
   for (;;) {
     const newPosition = getRandomPosition()
@@ -10,14 +18,6 @@ const getNewRandomPosition = (currentPosition: Position): Position => {
       return newPosition
     }
   }
-}
-
-const getRandomPosition = (): Position => {
-  return getRandomInteger(0, 3)
-}
-
-const getRandomInteger = (minimum: number, maximum: number): number => {
-  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
 }
 
 export const MainView = () => {

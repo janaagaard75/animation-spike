@@ -36,6 +36,7 @@ interface Props {
   destination: Position
 }
 
+// TODO: Give the square another color while it's animating to answer the question: Does it start out a one second animation without moving?
 export const PositionedSquare = (props: Props) => {
   const [animatedPosition] = useState(
     new Animated.ValueXY(toCoordinates(props.destination))

@@ -1,2 +1,2 @@
-export const squareSize = 100
-export const fieldSize = 300
+export const squareSize = 60
+export const fieldSize = 200

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Text, View } from "react-native"
+import { Button, View } from "react-native"
 import { Position } from "./Position"
 import { PositionedSquare } from "./PositionedSquare"
 
@@ -20,19 +20,6 @@ const getNewRandomPosition = (currentPosition: Position): Position => {
   }
 }
 
-const getPositionName = (position: Position) => {
-  switch (position) {
-    case Position.BottomLeft:
-      return "Bottom left"
-    case Position.BottomRight:
-      return "Bottom right"
-    case Position.TopLeft:
-      return "Top left"
-    case Position.TopRight:
-      return "Top right"
-  }
-}
-
 export const MainView = () => {
   const [squarePosition, setSquarePosition] = useState(getRandomPosition())
 
@@ -46,16 +33,9 @@ export const MainView = () => {
       }}
     >
       <PositionedSquare destination={squarePosition} />
-      <Text
-        style={{
-          marginTop: 20
-        }}
-      >
-        Destination: {getPositionName(squarePosition)}
-      </Text>
       <View
         style={{
-          marginTop: 20
+          marginTop: 10
         }}
       >
         <Button

@@ -44,8 +44,8 @@ export const PositionedSquare = (props: Props) => {
 
   useEffect(() => {
     Animated.timing(animatedPosition, {
-      toValue: toCoordinates(props.destination),
-      duration: 1000
+      duration: 1000,
+      toValue: toCoordinates(props.destination)
     }).start()
   })
 

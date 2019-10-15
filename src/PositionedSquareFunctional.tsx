@@ -36,7 +36,7 @@ interface Props {
   destination: Position
 }
 
-export const PositionedSquare = (props: Props) => {
+export const PositionedSquareFunctional = (props: Props) => {
   const [animating, setAnimating] = useState(false)
 
   const [animatedPosition] = useState(

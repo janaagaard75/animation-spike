@@ -2,10 +2,14 @@ import React from "react"
 import { View } from "react-native"
 import { squareSize } from "./constants"
 
-export const Square = () => (
+interface Props {
+  animating: boolean
+}
+
+export const Square = (props: Props) => (
   <View
     style={{
-      backgroundColor: "red",
+      backgroundColor: props.animating ? "red" : "blue",
       borderRadius: 5,
       height: squareSize,
       width: squareSize

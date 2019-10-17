@@ -21,8 +21,7 @@ export const PositionedSquareFunctional = (props: Props) => {
 
   useEffect(() => {
     setAnimating(true)
-    Animated.timing(animatedPosition, {
-      duration: 1000,
+    Animated.spring(animatedPosition, {
       toValue: props.destination
     }).start()
   }, [animatedPosition, props.destination])

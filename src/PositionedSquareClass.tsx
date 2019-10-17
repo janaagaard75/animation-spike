@@ -37,8 +37,7 @@ export class PositionedSquareClass extends Component<Props, State> {
     this.setState({
       animating: true
     })
-    Animated.timing(this.state.animatedPosition, {
-      duration: 1000,
+    Animated.spring(this.state.animatedPosition, {
       toValue: this.props.destination
     }).start()
   }

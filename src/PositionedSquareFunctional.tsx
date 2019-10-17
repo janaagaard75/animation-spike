@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { Animated } from "react-native"
 import { fieldSize } from "./constants"
+import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
 
 interface Props {
-  destination: { x: number; y: number }
+  destination: Coordinates
 }
 
 export const PositionedSquareFunctional = (props: Props) => {
@@ -13,11 +14,7 @@ export const PositionedSquareFunctional = (props: Props) => {
   const [animatedPosition] = useState(new Animated.ValueXY(props.destination))
 
   animatedPosition.addListener(currentValue => {
-    const destinationCoordinates = props.destination
-    if (
-      currentValue.x === destinationCoordinates.x &&
-      currentValue.y === destinationCoordinates.y
-    ) {
+    if (props.destination.equals(currentValue)) {
       setAnimating(false)
     }
   })

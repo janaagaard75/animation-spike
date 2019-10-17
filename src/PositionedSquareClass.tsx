@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import { Animated } from "react-native"
 import { fieldSize } from "./constants"
+import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
 
 interface Props {
-  destination: { x: number; y: number }
+  destination: Coordinates
 }
 
 interface State {
@@ -22,10 +23,7 @@ export class PositionedSquareClass extends Component<Props, State> {
     }
 
     this.state.animatedPosition.addListener(currentValue => {
-      if (
-        currentValue.x === this.props.destination.x &&
-        currentValue.y === this.props.destination.y
-      ) {
+      if (this.props.destination.equals(currentValue)) {
         this.setState({ animating: false })
       }
     })

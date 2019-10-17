@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { Button, View } from "react-native"
 import { Position } from "./Position"
-import { PositionedSquareClass } from "./PositionedSquareClass"
-import { PositionedSquareFunctional } from "./PositionedSquareFunctional"
+import { PositionedSquare } from "./PositionedSquare"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
@@ -33,8 +32,7 @@ export const MainView = () => {
         justifyContent: "center"
       }}
     >
-      <PositionedSquareClass destination={squarePosition} />
-      <PositionedSquareFunctional destination={squarePosition} />
+      <PositionedSquare destination={squarePosition} />
       <View
         style={{
           marginTop: 10

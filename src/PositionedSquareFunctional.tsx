@@ -1,50 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { Animated } from "react-native"
-import { fieldSize, squareSize } from "./constants"
-import { Position } from "./Position"
+import { fieldSize } from "./constants"
 import { Square } from "./Square"
 
-const toCoordinates = (position: Position): { x: number; y: number } => {
-  switch (position) {
-    case Position.BottomLeft:
-      return {
-        x: 0,
-        y: fieldSize - squareSize
-      }
-
-    case Position.BottomRight:
-      return {
-        x: fieldSize - squareSize,
-        y: fieldSize - squareSize
-      }
-
-    case Position.TopLeft:
-      return {
-        x: 0,
-        y: 0
-      }
-
-    case Position.TopRight:
-      return {
-        x: fieldSize - squareSize,
-        y: 0
-      }
-  }
-}
-
 interface Props {
-  destination: Position
+  destination: { x: number; y: number }
 }
 
 export const PositionedSquareFunctional = (props: Props) => {
   const [animating, setAnimating] = useState(false)
 
-  const [animatedPosition] = useState(
-    new Animated.ValueXY(toCoordinates(props.destination))
-  )
+  const [animatedPosition] = useState(new Animated.ValueXY(props.destination))
 
   animatedPosition.addListener(currentValue => {
-    const destinationCoordinates = toCoordinates(props.destination)
+    const destinationCoordinates = props.destination
     if (
       currentValue.x === destinationCoordinates.x &&
       currentValue.y === destinationCoordinates.y
@@ -57,7 +26,7 @@ export const PositionedSquareFunctional = (props: Props) => {
     setAnimating(true)
     Animated.timing(animatedPosition, {
       duration: 1000,
-      toValue: toCoordinates(props.destination)
+      toValue: props.destination
     }).start()
   }, [animatedPosition, props.destination])
 

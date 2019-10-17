@@ -1,39 +1,10 @@
 import React, { Component } from "react"
 import { Animated } from "react-native"
-import { fieldSize, squareSize } from "./constants"
-import { Position } from "./Position"
+import { fieldSize } from "./constants"
 import { Square } from "./Square"
 
-const toCoordinates = (position: Position): { x: number; y: number } => {
-  switch (position) {
-    case Position.BottomLeft:
-      return {
-        x: 0,
-        y: fieldSize - squareSize
-      }
-
-    case Position.BottomRight:
-      return {
-        x: fieldSize - squareSize,
-        y: fieldSize - squareSize
-      }
-
-    case Position.TopLeft:
-      return {
-        x: 0,
-        y: 0
-      }
-
-    case Position.TopRight:
-      return {
-        x: fieldSize - squareSize,
-        y: 0
-      }
-  }
-}
-
 interface Props {
-  destination: Position
+  destination: { x: number; y: number }
 }
 
 interface State {
@@ -46,15 +17,14 @@ export class PositionedSquareClass extends Component<Props, State> {
     super(props)
 
     this.state = {
-      animatedPosition: new Animated.ValueXY(toCoordinates(props.destination)),
+      animatedPosition: new Animated.ValueXY(props.destination),
       animating: false
     }
 
     this.state.animatedPosition.addListener(currentValue => {
-      const destinationCoordinates = toCoordinates(this.props.destination)
       if (
-        currentValue.x === destinationCoordinates.x &&
-        currentValue.y === destinationCoordinates.y
+        currentValue.x === this.props.destination.x &&
+        currentValue.y === this.props.destination.y
       ) {
         this.setState({ animating: false })
       }
@@ -71,7 +41,7 @@ export class PositionedSquareClass extends Component<Props, State> {
     })
     Animated.timing(this.state.animatedPosition, {
       duration: 1000,
-      toValue: toCoordinates(this.props.destination)
+      toValue: this.props.destination
     }).start()
   }
 

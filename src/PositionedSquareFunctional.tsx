@@ -22,7 +22,8 @@ export const PositionedSquareFunctional = (props: Props) => {
   useEffect(() => {
     setAnimating(true)
     Animated.spring(animatedPosition, {
-      toValue: props.destination
+      toValue: props.destination,
+      useNativeDriver: true
     }).start()
   }, [animatedPosition, props.destination])
 

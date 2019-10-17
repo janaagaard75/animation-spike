@@ -38,7 +38,8 @@ export class PositionedSquareClass extends Component<Props, State> {
       animating: true
     })
     Animated.spring(this.state.animatedPosition, {
-      toValue: this.props.destination
+      toValue: this.props.destination,
+      useNativeDriver: true
     }).start()
   }
 

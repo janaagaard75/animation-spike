@@ -51,16 +51,21 @@ export class PositionedSquareClass extends Component<Props, State> {
     }
   }
 
-  public componentDidUpdate(_prevProps: Props, prevState: State) {
+  public componentDidUpdate(prevProps: Props, _prevState: State) {
+    if (prevProps.destination === this.props.destination) {
+      return
+    }
+
+    this.setState({
+      animating: true
+    })
     Animated.timing(this.state.animatedPosition, {
       duration: 1000,
       toValue: toCoordinates(this.props.destination)
     }).start(() => {
-      if (prevState.animating) {
-        this.setState({
-          animating: false
-        })
-      }
+      this.setState({
+        animating: false
+      })
     })
   }
 

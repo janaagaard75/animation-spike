@@ -49,6 +49,16 @@ export class PositionedSquareClass extends Component<Props, State> {
       animatedPosition: new Animated.ValueXY(toCoordinates(props.destination)),
       animating: false
     }
+
+    this.state.animatedPosition.addListener(currentValue => {
+      const destinationCoordinates = toCoordinates(this.props.destination)
+      if (
+        currentValue.x === destinationCoordinates.x &&
+        currentValue.y === destinationCoordinates.y
+      ) {
+        this.setState({ animating: false })
+      }
+    })
   }
 
   public componentDidUpdate(prevProps: Props, _prevState: State) {
@@ -62,11 +72,7 @@ export class PositionedSquareClass extends Component<Props, State> {
     Animated.timing(this.state.animatedPosition, {
       duration: 1000,
       toValue: toCoordinates(this.props.destination)
-    }).start(() => {
-      this.setState({
-        animating: false
-      })
-    })
+    }).start()
   }
 
   public render() {

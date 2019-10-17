@@ -43,15 +43,23 @@ export const PositionedSquareFunctional = (props: Props) => {
     new Animated.ValueXY(toCoordinates(props.destination))
   )
 
+  animatedPosition.addListener(currentValue => {
+    const destinationCoordinates = toCoordinates(props.destination)
+    if (
+      currentValue.x === destinationCoordinates.x &&
+      currentValue.y === destinationCoordinates.y
+    ) {
+      setAnimating(false)
+    }
+  })
+
   useEffect(() => {
     setAnimating(true)
     Animated.timing(animatedPosition, {
       duration: 1000,
       toValue: toCoordinates(props.destination)
-    }).start(() => {
-      setAnimating(false)
-    })
-  }, [props.destination, animatedPosition])
+    }).start()
+  }, [animatedPosition, props.destination])
 
   return (
     <Animated.View

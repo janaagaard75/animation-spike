@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
+import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 
 interface State {
   animatedPosition: Animated.ValueXY
+  previousPosition: Coordinates
 }
 
 export class DraggableSquare extends Component<Props, State> {
@@ -15,11 +17,16 @@ export class DraggableSquare extends Component<Props, State> {
     super(props)
 
     this.state = {
-      animatedPosition: new Animated.ValueXY()
+      animatedPosition: new Animated.ValueXY(),
+      previousPosition: new Coordinates(0, 0)
     }
 
-    // TODO: Fix dragging again.
     this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (_e, _gestureState) => true,
+      onPanResponderStart: (_e, _gestureState) => {
+        console.log(this.state.previousPosition)
+        this.state.animatedPosition.setOffset(this.state.previousPosition)
+      },
       onPanResponderMove: (e, gestureState) => {
         Animated.event([
           null,
@@ -29,7 +36,14 @@ export class DraggableSquare extends Component<Props, State> {
           }
         ])(e, gestureState)
       },
-      onStartShouldSetPanResponder: (_e, _gestureState) => true
+      onPanResponderEnd: (_e, gestureState) => {
+        this.setState({
+          previousPosition: new Coordinates(
+            this.state.previousPosition.x + gestureState.dx,
+            this.state.previousPosition.y + gestureState.dy
+          )
+        })
+      }
     })
   }
 

@@ -3,6 +3,7 @@ import { Animated } from "react-native"
 import { fieldSize } from "./constants"
 import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
+import { SquareState } from "./SquareState"
 
 interface Props {
   destination: Coordinates
@@ -37,7 +38,9 @@ export const PositionedSquareFunctional = (props: Props) => {
         }
       ]}
     >
-      <Square animating={animating} />
+      <Square
+        squareState={animating ? SquareState.animating : SquareState.idle}
+      />
     </Animated.View>
   )
 }

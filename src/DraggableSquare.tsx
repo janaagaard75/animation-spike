@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
 import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
+import { SquareState } from "./SquareState"
 
 interface Props {
   animating: boolean
@@ -57,7 +58,11 @@ export class DraggableSquare extends Component<Props, State> {
         }}
         {...this.panResponder.panHandlers}
       >
-        <Square animating={this.props.animating}></Square>
+        <Square
+          squareState={
+            this.props.animating ? SquareState.animating : SquareState.idle
+          }
+        ></Square>
       </Animated.View>
     )
   }

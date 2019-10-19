@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-import { Animated, PanResponder, PanResponderInstance } from "react-native"
+import { Animated } from "react-native"
 import { fieldSize } from "./constants"
 import { Coordinates } from "./Coordinates"
-import { Square } from "./Square"
+import { DraggableSquare } from "./DraggableSquare"
 
 interface Props {
   destination: Coordinates
@@ -27,23 +27,7 @@ export class PositionedSquareClass extends Component<Props, State> {
         this.setState({ animating: false })
       }
     })
-
-    // TODO: This only works when destination is (0, 0). Should dragging be moved to a sub-component?
-    this.panResponder = PanResponder.create({
-      onPanResponderMove: (e, gestureState) => {
-        Animated.event([
-          null,
-          {
-            dx: this.state.animatedPosition.x,
-            dy: this.state.animatedPosition.y
-          }
-        ])(e, gestureState)
-      },
-      onStartShouldSetPanResponder: (_e, _gestureState) => true
-    })
   }
-
-  private panResponder: PanResponderInstance
 
   public componentDidUpdate(prevProps: Props, _prevState: State) {
     if (prevProps.destination === this.props.destination) {
@@ -62,16 +46,13 @@ export class PositionedSquareClass extends Component<Props, State> {
   public render() {
     return (
       <Animated.View
-        style={[
-          {
-            height: fieldSize,
-            transform: this.state.animatedPosition.getTranslateTransform(),
-            width: fieldSize
-          }
-        ]}
-        {...this.panResponder.panHandlers}
+        style={{
+          height: fieldSize,
+          transform: this.state.animatedPosition.getTranslateTransform(),
+          width: fieldSize
+        }}
       >
-        <Square animating={this.state.animating} />
+        <DraggableSquare animating={this.state.animating} />
       </Animated.View>
     )
   }

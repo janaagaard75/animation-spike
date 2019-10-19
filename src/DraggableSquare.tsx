@@ -10,6 +10,7 @@ interface Props {
 
 interface State {
   animatedPosition: Animated.ValueXY
+  dragging: boolean
   previousPosition: Coordinates
 }
 
@@ -19,13 +20,16 @@ export class DraggableSquare extends Component<Props, State> {
 
     this.state = {
       animatedPosition: new Animated.ValueXY(),
+      dragging: false,
       previousPosition: new Coordinates(0, 0)
     }
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderStart: (_e, _gestureState) => {
-        console.log(this.state.previousPosition)
+        this.setState({
+          dragging: true
+        })
         this.state.animatedPosition.setOffset(this.state.previousPosition)
       },
       onPanResponderMove: (e, gestureState) => {
@@ -39,6 +43,7 @@ export class DraggableSquare extends Component<Props, State> {
       },
       onPanResponderEnd: (_e, gestureState) => {
         this.setState({
+          dragging: false,
           previousPosition: new Coordinates(
             this.state.previousPosition.x + gestureState.dx,
             this.state.previousPosition.y + gestureState.dy
@@ -58,12 +63,20 @@ export class DraggableSquare extends Component<Props, State> {
         }}
         {...this.panResponder.panHandlers}
       >
-        <Square
-          squareState={
-            this.props.animating ? SquareState.animating : SquareState.idle
-          }
-        ></Square>
+        <Square squareState={this.getSquareState()}></Square>
       </Animated.View>
     )
+  }
+
+  private getSquareState(): SquareState {
+    if (this.props.animating) {
+      return SquareState.animating
+    }
+
+    if (this.state.dragging) {
+      return SquareState.dragging
+    }
+
+    return SquareState.idle
   }
 }

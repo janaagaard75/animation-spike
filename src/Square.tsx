@@ -26,5 +26,5 @@ export const Square = (props: Props) => (
       height: squareSize,
       width: squareSize
     }}
-  ></View>
+  />
 )

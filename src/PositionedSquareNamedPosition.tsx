@@ -24,7 +24,7 @@ interface Props {
   destination: Position
 }
 
-export const PositionedSquarePosition = (props: Props) => {
+export const PositionedSquareNamedPosition = (props: Props) => {
   const destinationCoordinates = toCoordinates(props.destination)
   return (
     <PositionedSquareCoordinates

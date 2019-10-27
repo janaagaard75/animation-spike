@@ -2,8 +2,7 @@ import React from "react"
 import { fieldSize, squareSize } from "./constants"
 import { Coordinates } from "./Coordinates"
 import { Position } from "./Position"
-import { PositionedSquareClass } from "./PositionedSquareClass"
-import { PositionedSquareFunctional } from "./PositionedSquareFunctional"
+import { PositionedSquareCoordinates } from "./PositionedSquareCoordinates"
 
 const toCoordinates = (position: Position): Coordinates => {
   switch (position) {
@@ -25,16 +24,11 @@ interface Props {
   destination: Position
 }
 
-export const PositionedSquare = (props: Props) => {
+export const PositionedSquarePosition = (props: Props) => {
   const destinationCoordinates = toCoordinates(props.destination)
   return (
-    <>
-      <PositionedSquareClass
-        destination={destinationCoordinates}
-      ></PositionedSquareClass>
-      <PositionedSquareFunctional
-        destination={destinationCoordinates}
-      ></PositionedSquareFunctional>
-    </>
+    <PositionedSquareCoordinates
+      destination={destinationCoordinates}
+    ></PositionedSquareCoordinates>
   )
 }

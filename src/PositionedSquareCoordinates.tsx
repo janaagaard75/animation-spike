@@ -13,7 +13,7 @@ interface State {
   animating: boolean
 }
 
-export class PositionedSquareClass extends Component<Props, State> {
+export class PositionedSquareCoordinates extends Component<Props, State> {
   public constructor(props: Props) {
     super(props)
 

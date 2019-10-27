@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { Button, View } from "react-native"
+import { DropZones } from "./DropZones"
+import { Field } from "./Field"
 import { Position } from "./Position"
 import { PositionedSquareNamedPosition } from "./PositionedSquareNamedPosition"
 
@@ -32,7 +34,10 @@ export const MainView = () => {
         justifyContent: "center"
       }}
     >
-      <PositionedSquareNamedPosition destination={squarePosition} />
+      <Field>
+        <DropZones />
+        <PositionedSquareNamedPosition destination={squarePosition} />
+      </Field>
       <View
         style={{
           marginTop: 10

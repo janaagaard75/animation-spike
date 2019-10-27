@@ -1,4 +1,5 @@
 import React from "react"
+import { View } from "react-native"
 import { fieldSize, squareSize } from "./constants"
 import { Coordinates } from "./Coordinates"
 import { Position } from "./Position"
@@ -27,8 +28,10 @@ interface Props {
 export const PositionedSquareNamedPosition = (props: Props) => {
   const destinationCoordinates = toCoordinates(props.destination)
   return (
-    <PositionedSquareCoordinates
-      destination={destinationCoordinates}
-    ></PositionedSquareCoordinates>
+    <View style={{ position: "absolute" }}>
+      <PositionedSquareCoordinates
+        destination={destinationCoordinates}
+      ></PositionedSquareCoordinates>
+    </View>
   )
 }

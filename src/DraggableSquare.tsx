@@ -24,13 +24,14 @@ export class DraggableSquare extends Component<Props, State> {
       previousPosition: new Coordinates(0, 0)
     }
 
+    this.state.animatedPosition.setOffset(this.state.previousPosition)
+
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderGrant: (_e, _gestureState) => {
         this.setState({
           dragging: true
         })
-        this.state.animatedPosition.setOffset(this.state.previousPosition)
       },
       onPanResponderMove: (e, gestureState) => {
         Animated.event([
@@ -42,6 +43,10 @@ export class DraggableSquare extends Component<Props, State> {
         ])(e, gestureState)
       },
       onPanResponderEnd: (_e, gestureState) => {
+        Animated.spring(this.state.animatedPosition, {
+          toValue: { x: 0, y: 0 }
+        }).start()
+
         this.setState({
           dragging: false,
           previousPosition: new Coordinates(

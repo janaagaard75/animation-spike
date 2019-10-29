@@ -2,15 +2,16 @@ import React, { useState } from "react"
 import { Button, View } from "react-native"
 import { DropZones } from "./DropZones"
 import { Field } from "./Field"
-import { Position } from "./Position"
 import { PositionedSquarePosition } from "./PositionedSquarePosition"
+import { allPositions } from "./Positions/allPositions"
+import { Position } from "./Positions/Position"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
 }
 
 const getRandomPosition = (): Position => {
-  return getRandomInteger(0, 3)
+  return allPositions[getRandomInteger(0, allPositions.length - 1)]
 }
 
 const getNewRandomPosition = (currentPosition: Position): Position => {
@@ -35,7 +36,7 @@ export const MainView = () => {
       }}
     >
       <Field>
-        <DropZones />
+        <DropZones hoveredPosition={undefined} />
         <PositionedSquarePosition destination={squarePosition} />
       </Field>
       <View

@@ -11,9 +11,9 @@ const getColor = (squareState: SquareState): string => {
   switch (squareState) {
     case SquareState.idle:
       return "black"
-    case SquareState.animatingMove:
+    case SquareState.moving:
       return "red"
-    case SquareState.animatingSnap:
+    case SquareState.snapping:
       return "lime"
     case SquareState.dragging:
       return "green"

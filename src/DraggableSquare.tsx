@@ -88,7 +88,7 @@ export class DraggableSquare extends Component<Props, State> {
 
   private getSquareState(): SquareState {
     if (this.props.animating) {
-      return SquareState.animatingMove
+      return SquareState.moving
     }
 
     if (this.state.visualState === VisualState.dragging) {
@@ -96,7 +96,7 @@ export class DraggableSquare extends Component<Props, State> {
     }
 
     if (this.state.visualState === VisualState.snapping) {
-      return SquareState.animatingSnap
+      return SquareState.snapping
     }
 
     return SquareState.idle

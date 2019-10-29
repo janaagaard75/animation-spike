@@ -13,6 +13,8 @@ const getColor = (squareState: SquareState): string => {
       return "black"
     case SquareState.animatingMove:
       return "red"
+    case SquareState.animatingSnap:
+      return "lime"
     case SquareState.dragging:
       return "green"
   }

@@ -4,14 +4,20 @@ import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
 
+enum VisualState {
+  idleOrMoving,
+  dragging,
+  snapping
+}
+
 interface Props {
   animating: boolean
 }
 
 interface State {
   animatedPosition: Animated.ValueXY
-  dragging: boolean
   previousPosition: Coordinates
+  visualState: VisualState
 }
 
 export class DraggableSquare extends Component<Props, State> {
@@ -20,8 +26,8 @@ export class DraggableSquare extends Component<Props, State> {
 
     this.state = {
       animatedPosition: new Animated.ValueXY(),
-      dragging: false,
-      previousPosition: new Coordinates(0, 0)
+      previousPosition: new Coordinates(0, 0),
+      visualState: VisualState.idleOrMoving
     }
 
     this.state.animatedPosition.setOffset(this.state.previousPosition)
@@ -30,7 +36,7 @@ export class DraggableSquare extends Component<Props, State> {
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderGrant: (_e, _gestureState) => {
         this.setState({
-          dragging: true
+          visualState: VisualState.dragging
         })
       },
       onPanResponderMove: (e, gestureState) => {
@@ -43,12 +49,19 @@ export class DraggableSquare extends Component<Props, State> {
         ])(e, gestureState)
       },
       onPanResponderEnd: (_e, gestureState) => {
+        this.setState({
+          visualState: VisualState.snapping
+        })
+
         Animated.spring(this.state.animatedPosition, {
           toValue: { x: 0, y: 0 }
-        }).start()
+        }).start(() => {
+          this.setState({
+            visualState: VisualState.idleOrMoving
+          })
+        })
 
         this.setState({
-          dragging: false,
           previousPosition: new Coordinates(
             this.state.previousPosition.x + gestureState.dx,
             this.state.previousPosition.y + gestureState.dy
@@ -78,8 +91,12 @@ export class DraggableSquare extends Component<Props, State> {
       return SquareState.animatingMove
     }
 
-    if (this.state.dragging) {
+    if (this.state.visualState === VisualState.dragging) {
       return SquareState.dragging
+    }
+
+    if (this.state.visualState === VisualState.snapping) {
+      return SquareState.animatingSnap
     }
 
     return SquareState.idle

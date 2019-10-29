@@ -25,7 +25,7 @@ interface Props {
   destination: Position
 }
 
-export const PositionedSquareNamedPosition = (props: Props) => {
+export const PositionedSquarePosition = (props: Props) => {
   const destinationCoordinates = toCoordinates(props.destination)
   return (
     <View style={{ position: "absolute" }}>

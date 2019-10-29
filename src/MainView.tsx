@@ -3,7 +3,7 @@ import { Button, View } from "react-native"
 import { DropZones } from "./DropZones"
 import { Field } from "./Field"
 import { Position } from "./Position"
-import { PositionedSquareNamedPosition } from "./PositionedSquareNamedPosition"
+import { PositionedSquarePosition } from "./PositionedSquarePosition"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
@@ -36,7 +36,7 @@ export const MainView = () => {
     >
       <Field>
         <DropZones />
-        <PositionedSquareNamedPosition destination={squarePosition} />
+        <PositionedSquarePosition destination={squarePosition} />
       </Field>
       <View
         style={{

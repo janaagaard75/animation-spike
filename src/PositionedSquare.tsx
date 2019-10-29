@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { Animated } from "react-native"
 import { fieldSize } from "./constants"
-import { Coordinates } from "./Coordinates"
 import { DraggableSquare } from "./DraggableSquare"
+import { Position } from "./Positions/Position"
 
 interface Props {
-  destination: Coordinates
+  destination: Position
 }
 
 interface State {
@@ -13,17 +13,17 @@ interface State {
   animating: boolean
 }
 
-export class PositionedSquareCoordinates extends Component<Props, State> {
+export class PositionedSquare extends Component<Props, State> {
   public constructor(props: Props) {
     super(props)
 
     this.state = {
-      animatedPosition: new Animated.ValueXY(props.destination),
+      animatedPosition: new Animated.ValueXY(props.destination.coordinates),
       animating: false
     }
 
     this.state.animatedPosition.addListener(currentValue => {
-      if (this.props.destination.equals(currentValue)) {
+      if (this.props.destination.coordinates.equals(currentValue)) {
         this.setState({ animating: false })
       }
     })
@@ -38,7 +38,7 @@ export class PositionedSquareCoordinates extends Component<Props, State> {
       animating: true
     })
     Animated.spring(this.state.animatedPosition, {
-      toValue: this.props.destination,
+      toValue: this.props.destination.coordinates,
       useNativeDriver: true
     }).start()
   }

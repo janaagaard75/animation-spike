@@ -26,7 +26,7 @@ export class DraggableSquare extends Component<Props, State> {
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
-      onPanResponderStart: (_e, _gestureState) => {
+      onPanResponderGrant: (_e, _gestureState) => {
         this.setState({
           dragging: true
         })

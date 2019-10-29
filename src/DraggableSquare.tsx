@@ -54,6 +54,7 @@ export class DraggableSquare extends Component<Props, State> {
         })
 
         Animated.spring(this.state.animatedPosition, {
+          // TODO: Support dragging to another position.
           toValue: { x: 0, y: 0 }
         }).start(() => {
           this.setState({

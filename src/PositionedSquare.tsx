@@ -24,6 +24,7 @@ export class PositionedSquare extends Component<Props, State> {
 
     this.state.animatedPosition.addListener(currentValue => {
       if (this.props.destination.coordinates.equals(currentValue)) {
+        // TODO: Why does it take so long for the square to get back to black?
         this.setState({ moving: false })
       }
     })

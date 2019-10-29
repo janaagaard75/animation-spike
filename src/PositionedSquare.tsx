@@ -10,7 +10,7 @@ interface Props {
 
 interface State {
   animatedPosition: Animated.ValueXY
-  animating: boolean
+  moving: boolean
 }
 
 export class PositionedSquare extends Component<Props, State> {
@@ -19,12 +19,12 @@ export class PositionedSquare extends Component<Props, State> {
 
     this.state = {
       animatedPosition: new Animated.ValueXY(props.destination.coordinates),
-      animating: false
+      moving: false
     }
 
     this.state.animatedPosition.addListener(currentValue => {
       if (this.props.destination.coordinates.equals(currentValue)) {
-        this.setState({ animating: false })
+        this.setState({ moving: false })
       }
     })
   }
@@ -35,7 +35,7 @@ export class PositionedSquare extends Component<Props, State> {
     }
 
     this.setState({
-      animating: true
+      moving: true
     })
     Animated.spring(this.state.animatedPosition, {
       toValue: this.props.destination.coordinates,
@@ -52,7 +52,7 @@ export class PositionedSquare extends Component<Props, State> {
           width: fieldSize
         }}
       >
-        <DraggableSquare animating={this.state.animating} />
+        <DraggableSquare moving={this.state.moving} />
       </Animated.View>
     )
   }

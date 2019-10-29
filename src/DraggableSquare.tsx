@@ -11,7 +11,7 @@ enum VisualState {
 }
 
 interface Props {
-  animating: boolean
+  moving: boolean
 }
 
 interface State {
@@ -87,16 +87,16 @@ export class DraggableSquare extends Component<Props, State> {
   }
 
   private getSquareState(): SquareState {
-    if (this.props.animating) {
-      return SquareState.moving
-    }
-
     if (this.state.visualState === VisualState.dragging) {
       return SquareState.dragging
     }
 
     if (this.state.visualState === VisualState.snapping) {
       return SquareState.snapping
+    }
+
+    if (this.props.moving) {
+      return SquareState.moving
     }
 
     return SquareState.idle

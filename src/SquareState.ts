@@ -1,5 +1,5 @@
 export enum SquareState {
   idle,
-  animating,
+  animatingMove,
   dragging
 }

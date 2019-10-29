@@ -75,7 +75,7 @@ export class DraggableSquare extends Component<Props, State> {
 
   private getSquareState(): SquareState {
     if (this.props.animating) {
-      return SquareState.animating
+      return SquareState.animatingMove
     }
 
     if (this.state.dragging) {

@@ -1,42 +1,44 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
 import { Coordinates } from "./Coordinates"
+import { Position } from "./Positions/Position"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
 
-enum VisualState {
-  idleOrMoving,
-  dragging,
-  snapping
-}
-
 interface Props {
-  moving: boolean
+  destination: Position
 }
 
 interface State {
+  // TODO: Consider moving animatedPosition from state to a class property.
   animatedPosition: Animated.ValueXY
   previousPosition: Coordinates
-  visualState: VisualState
+  visualState: SquareState
 }
 
-export class DraggableSquare extends Component<Props, State> {
+export class PositionedDraggableSquare extends Component<Props, State> {
   public constructor(props: Props) {
     super(props)
 
     this.state = {
-      animatedPosition: new Animated.ValueXY(),
-      previousPosition: new Coordinates(0, 0),
-      visualState: VisualState.idleOrMoving
+      animatedPosition: new Animated.ValueXY(props.destination.coordinates),
+      previousPosition: props.destination.coordinates,
+      visualState: SquareState.idle
     }
 
-    this.state.animatedPosition.setOffset(this.state.previousPosition)
+    // this.state.animatedPosition.setOffset(this.state.previousPosition)
+
+    this.state.animatedPosition.addListener(currentValue => {
+      if (this.props.destination.coordinates.equals(currentValue)) {
+        this.setState({ visualState: SquareState.idle })
+      }
+    })
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderGrant: (_e, _gestureState) => {
         this.setState({
-          visualState: VisualState.dragging
+          visualState: SquareState.dragging
         })
       },
       onPanResponderMove: (e, gestureState) => {
@@ -50,7 +52,7 @@ export class DraggableSquare extends Component<Props, State> {
       },
       onPanResponderEnd: (_e, gestureState) => {
         this.setState({
-          visualState: VisualState.snapping
+          visualState: SquareState.snapping
         })
 
         Animated.spring(this.state.animatedPosition, {
@@ -58,10 +60,11 @@ export class DraggableSquare extends Component<Props, State> {
           restDisplacementThreshold: 2,
           restSpeedThreshold: 2,
           // TODO: Support dragging to another position.
-          toValue: { x: 0, y: 0 }
+          toValue: { x: 0, y: 0 },
+          useNativeDriver: true
         }).start(() => {
           this.setState({
-            visualState: VisualState.idleOrMoving
+            visualState: SquareState.idle
           })
         })
 
@@ -77,6 +80,24 @@ export class DraggableSquare extends Component<Props, State> {
 
   private panResponder: PanResponderInstance
 
+  public componentDidUpdate(prevProps: Props, _prevState: State) {
+    if (prevProps.destination === this.props.destination) {
+      return
+    }
+
+    this.setState({
+      visualState: SquareState.moving
+    })
+
+    Animated.spring(this.state.animatedPosition, {
+      bounciness: 3,
+      restDisplacementThreshold: 2,
+      restSpeedThreshold: 2,
+      toValue: this.props.destination.coordinates,
+      useNativeDriver: true
+    }).start()
+  }
+
   public render() {
     return (
       <Animated.View
@@ -85,24 +106,8 @@ export class DraggableSquare extends Component<Props, State> {
         }}
         {...this.panResponder.panHandlers}
       >
-        <Square squareState={this.getSquareState()}></Square>
+        <Square squareState={this.state.visualState}></Square>
       </Animated.View>
     )
-  }
-
-  private getSquareState(): SquareState {
-    if (this.state.visualState === VisualState.dragging) {
-      return SquareState.dragging
-    }
-
-    if (this.state.visualState === VisualState.snapping) {
-      return SquareState.snapping
-    }
-
-    if (this.props.moving) {
-      return SquareState.moving
-    }
-
-    return SquareState.idle
   }
 }

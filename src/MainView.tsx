@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Button, View } from "react-native"
 import { DropZones } from "./DropZones"
 import { Field } from "./Field"
-import { PositionedSquare } from "./PositionedSquare"
+import { PositionedDraggableSquare } from "./PositionedDraggableSquare"
 import { allPositions } from "./Positions/allPositions"
 import { Position } from "./Positions/Position"
 
@@ -37,7 +37,7 @@ export const MainView = () => {
     >
       <Field>
         <DropZones hoveredPosition={undefined} />
-        <PositionedSquare destination={squarePosition} />
+        <PositionedDraggableSquare destination={squarePosition} />
       </Field>
       <View
         style={{

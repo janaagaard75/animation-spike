@@ -10,7 +10,6 @@ interface Props {
 }
 
 interface State {
-  // TODO: Consider moving animatedPosition from state to a class property.
   animatedPosition: Animated.ValueXY
   previousPosition: Coordinates
   visualState: SquareState

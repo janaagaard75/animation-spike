@@ -26,7 +26,7 @@ export class PositionedDraggableSquare extends Component<Props, State> {
       visualState: SquareState.idle
     }
 
-    // this.state.animatedPosition.setOffset(this.state.previousPosition)
+    // this.state.animatedPosition.setOffset(props.destination.coordinates)
 
     this.state.animatedPosition.addListener(currentValue => {
       if (this.props.destination.coordinates.equals(currentValue)) {
@@ -34,6 +34,7 @@ export class PositionedDraggableSquare extends Component<Props, State> {
       }
     })
 
+    // TODO: Support dragging from another position than 0,0.
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderGrant: (_e, _gestureState) => {

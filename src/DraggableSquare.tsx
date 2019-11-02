@@ -13,7 +13,7 @@ interface State {
   visualState: SquareState
 }
 
-export class PositionedDraggableSquare extends Component<Props, State> {
+export class DraggableSquare extends Component<Props, State> {
   public constructor(props: Props) {
     super(props)
 

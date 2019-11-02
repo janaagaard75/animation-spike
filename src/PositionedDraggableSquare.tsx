@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
-import { Coordinates } from "./Coordinates"
 import { Position } from "./Positions/Position"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
@@ -11,7 +10,6 @@ interface Props {
 
 interface State {
   animatedPosition: Animated.ValueXY
-  previousPosition: Coordinates
   visualState: SquareState
 }
 
@@ -21,19 +19,9 @@ export class PositionedDraggableSquare extends Component<Props, State> {
 
     this.state = {
       animatedPosition: new Animated.ValueXY(props.destination.coordinates),
-      previousPosition: props.destination.coordinates,
       visualState: SquareState.idle
     }
 
-    // this.state.animatedPosition.setOffset(props.destination.coordinates)
-
-    this.state.animatedPosition.addListener(currentValue => {
-      if (this.props.destination.coordinates.equals(currentValue)) {
-        this.setState({ visualState: SquareState.idle })
-      }
-    })
-
-    // TODO: Support dragging from another position than 0,0.
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderGrant: (_e, _gestureState) => {
@@ -41,16 +29,13 @@ export class PositionedDraggableSquare extends Component<Props, State> {
           visualState: SquareState.dragging
         })
       },
-      onPanResponderMove: (e, gestureState) => {
-        Animated.event([
-          null,
-          {
-            dx: this.state.animatedPosition.x,
-            dy: this.state.animatedPosition.y
-          }
-        ])(e, gestureState)
+      onPanResponderMove: (_e, gestureState) => {
+        this.state.animatedPosition.setValue({
+          x: this.props.destination.coordinates.x + gestureState.dx,
+          y: this.props.destination.coordinates.y + gestureState.dy
+        })
       },
-      onPanResponderEnd: (_e, gestureState) => {
+      onPanResponderEnd: (_e, _gestureState) => {
         this.setState({
           visualState: SquareState.snapping
         })
@@ -60,19 +45,15 @@ export class PositionedDraggableSquare extends Component<Props, State> {
           restDisplacementThreshold: 2,
           restSpeedThreshold: 2,
           // TODO: Support dragging to another position.
-          toValue: { x: 0, y: 0 },
+          toValue: {
+            x: this.props.destination.coordinates.x,
+            y: this.props.destination.coordinates.y
+          },
           useNativeDriver: true
         }).start(() => {
           this.setState({
             visualState: SquareState.idle
           })
-        })
-
-        this.setState({
-          previousPosition: new Coordinates(
-            this.state.previousPosition.x + gestureState.dx,
-            this.state.previousPosition.y + gestureState.dy
-          )
         })
       }
     })
@@ -95,7 +76,11 @@ export class PositionedDraggableSquare extends Component<Props, State> {
       restSpeedThreshold: 2,
       toValue: this.props.destination.coordinates,
       useNativeDriver: true
-    }).start()
+    }).start(() => {
+      this.setState({
+        visualState: SquareState.idle
+      })
+    })
   }
 
   public render() {

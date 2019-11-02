@@ -9,7 +9,6 @@ interface Props {
 }
 
 interface State {
-  animatedPosition: Animated.ValueXY
   visualState: SquareState
 }
 
@@ -18,9 +17,10 @@ export class DraggableSquare extends Component<Props, State> {
     super(props)
 
     this.state = {
-      animatedPosition: new Animated.ValueXY(props.destination),
       visualState: SquareState.idle
     }
+
+    this.animatedPosition = new Animated.ValueXY(props.destination)
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
@@ -30,7 +30,7 @@ export class DraggableSquare extends Component<Props, State> {
         })
       },
       onPanResponderMove: (_e, gestureState) => {
-        this.state.animatedPosition.setValue({
+        this.animatedPosition.setValue({
           x: this.props.destination.x + gestureState.dx,
           y: this.props.destination.y + gestureState.dy
         })
@@ -40,7 +40,7 @@ export class DraggableSquare extends Component<Props, State> {
           visualState: SquareState.snapping
         })
 
-        Animated.spring(this.state.animatedPosition, {
+        Animated.spring(this.animatedPosition, {
           bounciness: 3,
           restDisplacementThreshold: 2,
           restSpeedThreshold: 2,
@@ -59,6 +59,7 @@ export class DraggableSquare extends Component<Props, State> {
     })
   }
 
+  private animatedPosition: Animated.ValueXY
   private panResponder: PanResponderInstance
 
   public componentDidUpdate(prevProps: Props, _prevState: State) {
@@ -70,7 +71,7 @@ export class DraggableSquare extends Component<Props, State> {
       visualState: SquareState.moving
     })
 
-    Animated.spring(this.state.animatedPosition, {
+    Animated.spring(this.animatedPosition, {
       bounciness: 3,
       restDisplacementThreshold: 2,
       restSpeedThreshold: 2,
@@ -87,7 +88,7 @@ export class DraggableSquare extends Component<Props, State> {
     return (
       <Animated.View
         style={{
-          transform: this.state.animatedPosition.getTranslateTransform()
+          transform: this.animatedPosition.getTranslateTransform()
         }}
         {...this.panResponder.panHandlers}
       >

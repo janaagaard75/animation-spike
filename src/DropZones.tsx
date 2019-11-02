@@ -10,8 +10,8 @@ export const DropZones = (props: { hoveredPosition: Position | undefined }) => {
     <View style={{ height: fieldSize, position: "absolute", width: fieldSize }}>
       {allPositions.map((position, index) => (
         <DropZone
-          hovered={position === props.hoveredPosition}
-          position={position.coordinates}
+          hovered={position.equals(props.hoveredPosition)}
+          position={position}
           key={index}
         />
       ))}

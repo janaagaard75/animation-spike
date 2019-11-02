@@ -18,7 +18,7 @@ export class PositionedDraggableSquare extends Component<Props, State> {
     super(props)
 
     this.state = {
-      animatedPosition: new Animated.ValueXY(props.destination.coordinates),
+      animatedPosition: new Animated.ValueXY(props.destination),
       visualState: SquareState.idle
     }
 
@@ -31,8 +31,8 @@ export class PositionedDraggableSquare extends Component<Props, State> {
       },
       onPanResponderMove: (_e, gestureState) => {
         this.state.animatedPosition.setValue({
-          x: this.props.destination.coordinates.x + gestureState.dx,
-          y: this.props.destination.coordinates.y + gestureState.dy
+          x: this.props.destination.x + gestureState.dx,
+          y: this.props.destination.y + gestureState.dy
         })
       },
       onPanResponderEnd: (_e, _gestureState) => {
@@ -46,8 +46,8 @@ export class PositionedDraggableSquare extends Component<Props, State> {
           restSpeedThreshold: 2,
           // TODO: Support dragging to another position.
           toValue: {
-            x: this.props.destination.coordinates.x,
-            y: this.props.destination.coordinates.y
+            x: this.props.destination.x,
+            y: this.props.destination.y
           },
           useNativeDriver: true
         }).start(() => {
@@ -74,7 +74,7 @@ export class PositionedDraggableSquare extends Component<Props, State> {
       bounciness: 3,
       restDisplacementThreshold: 2,
       restSpeedThreshold: 2,
-      toValue: this.props.destination.coordinates,
+      toValue: this.props.destination,
       useNativeDriver: true
     }).start(() => {
       this.setState({

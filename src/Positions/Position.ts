@@ -1,6 +1,11 @@
-import { Coordinates } from "../Coordinates"
-
-// TODO: Set x and y directly on this class - Position and Coordinates are kinda the same thing.
 export abstract class Position {
-  public constructor(public coordinates: Coordinates) {}
+  constructor(public x: number, public y: number) {}
+
+  public equals(otherCoordinates: { x: number; y: number } | undefined) {
+    if (otherCoordinates === undefined) {
+      return false
+    }
+
+    return this.x === otherCoordinates.x && this.y === otherCoordinates.y
+  }
 }

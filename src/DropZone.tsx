@@ -1,12 +1,9 @@
 import React from "react"
 import { View } from "react-native"
 import { squareSize } from "./constants"
-import { Coordinates } from "./Coordinates"
+import { Position } from "./Positions/Position"
 
-export const DropZone = (props: {
-  hovered: boolean
-  position: Coordinates
-}) => (
+export const DropZone = (props: { hovered: boolean; position: Position }) => (
   <View
     style={{
       borderColor: "red",

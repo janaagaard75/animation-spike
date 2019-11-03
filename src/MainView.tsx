@@ -29,12 +29,6 @@ export const MainView = () => {
     undefined
   )
 
-  const updateHoveredPosition = (position: { x: number; y: number }): void => {
-    setHoveredPosition(
-      allPositions.find(namedPosition => namedPosition.isHovered(position))
-    )
-  }
-
   return (
     <View
       style={{
@@ -48,7 +42,13 @@ export const MainView = () => {
         <DropZones hoveredPosition={hoveredPosition} />
         <DraggableSquare
           destination={squarePosition}
-          squareMoved={updateHoveredPosition}
+          squareMoved={position =>
+            setHoveredPosition(
+              allPositions.find(namedPosition =>
+                namedPosition.isHovered(position)
+              )
+            )
+          }
         />
       </Field>
       <View

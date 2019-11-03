@@ -6,6 +6,7 @@ import { SquareState } from "./SquareState"
 
 interface Props {
   destination: Position
+  squareMoved: (position: { x: number; y: number }) => any
 }
 
 interface State {
@@ -58,6 +59,10 @@ export class DraggableSquare extends Component<Props, State> {
     })
 
     this.queuedMoves = 0
+
+    this.animatedPosition.addListener(position =>
+      this.props.squareMoved(position)
+    )
   }
 
   private animatedPosition: Animated.ValueXY

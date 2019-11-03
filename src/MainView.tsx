@@ -25,6 +25,15 @@ const getNewRandomPosition = (currentPosition: Position): Position => {
 
 export const MainView = () => {
   const [squarePosition, setSquarePosition] = useState(getRandomPosition())
+  const [hoveredPosition, setHoveredPosition] = useState<Position | undefined>(
+    undefined
+  )
+
+  const updateHoveredPosition = (position: { x: number; y: number }): void => {
+    setHoveredPosition(
+      allPositions.find(namedPosition => namedPosition.isHovered(position))
+    )
+  }
 
   return (
     <View
@@ -36,8 +45,11 @@ export const MainView = () => {
       }}
     >
       <Field>
-        <DropZones hoveredPosition={undefined} />
-        <DraggableSquare destination={squarePosition} />
+        <DropZones hoveredPosition={hoveredPosition} />
+        <DraggableSquare
+          destination={squarePosition}
+          squareMoved={updateHoveredPosition}
+        />
       </Field>
       <View
         style={{

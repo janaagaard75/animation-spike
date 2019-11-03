@@ -10,7 +10,6 @@ It turned out that it's possible to set the x and y positions directly in `onPan
 
 ## To Do
 
-- Highlight drop zones when they are hovered.
 - When letting go over a drop zone, then don't snap back.
 - Dropping the card moves it.
 - Join PositionedSquare and DraggableSquare, since this is probably required to get the animation right when dropping a card.

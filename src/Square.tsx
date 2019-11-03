@@ -9,14 +9,14 @@ interface Props {
 
 const getColor = (squareState: SquareState): string => {
   switch (squareState) {
+    case SquareState.dragging:
+      return "green"
     case SquareState.idle:
       return "black"
     case SquareState.moving:
       return "red"
     case SquareState.snapping:
       return "lime"
-    case SquareState.dragging:
-      return "green"
   }
 }
 

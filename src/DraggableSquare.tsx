@@ -57,10 +57,13 @@ export class DraggableSquare extends Component<Props, State> {
         })
       }
     })
+
+    this.queuedAnimations = 0
   }
 
   private animatedPosition: Animated.ValueXY
   private panResponder: PanResponderInstance
+  private queuedAnimations: number
 
   public componentDidUpdate(prevProps: Props, _prevState: State) {
     if (prevProps.destination === this.props.destination) {
@@ -70,6 +73,7 @@ export class DraggableSquare extends Component<Props, State> {
     this.setState({
       visualState: SquareState.moving
     })
+    this.queuedAnimations++
 
     Animated.spring(this.animatedPosition, {
       bounciness: 3,
@@ -78,10 +82,12 @@ export class DraggableSquare extends Component<Props, State> {
       toValue: this.props.destination,
       useNativeDriver: true
     }).start(() => {
-      // TODO: If move has been pressed once more before the first animation is done, then the state is not yet idle.
-      this.setState({
-        visualState: SquareState.idle
-      })
+      this.queuedAnimations--
+      if (this.queuedAnimations === 0) {
+        this.setState({
+          visualState: SquareState.idle
+        })
+      }
     })
   }
 

@@ -44,7 +44,6 @@ export class DraggableSquare extends Component<Props, State> {
           bounciness: 3,
           restDisplacementThreshold: 2,
           restSpeedThreshold: 2,
-          // TODO: Support dragging to another position.
           toValue: {
             x: this.props.destination.x,
             y: this.props.destination.y

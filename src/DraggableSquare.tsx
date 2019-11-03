@@ -57,12 +57,12 @@ export class DraggableSquare extends Component<Props, State> {
       }
     })
 
-    this.queuedAnimations = 0
+    this.queuedMoves = 0
   }
 
   private animatedPosition: Animated.ValueXY
   private panResponder: PanResponderInstance
-  private queuedAnimations: number
+  private queuedMoves: number
 
   public componentDidUpdate(prevProps: Props, _prevState: State) {
     if (prevProps.destination === this.props.destination) {
@@ -72,7 +72,7 @@ export class DraggableSquare extends Component<Props, State> {
     this.setState({
       visualState: SquareState.moving
     })
-    this.queuedAnimations++
+    this.queuedMoves++
 
     Animated.spring(this.animatedPosition, {
       bounciness: 3,
@@ -81,8 +81,8 @@ export class DraggableSquare extends Component<Props, State> {
       toValue: this.props.destination,
       useNativeDriver: true
     }).start(() => {
-      this.queuedAnimations--
-      if (this.queuedAnimations === 0) {
+      this.queuedMoves--
+      if (this.queuedMoves === 0) {
         this.setState({
           visualState: SquareState.idle
         })

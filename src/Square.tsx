@@ -4,7 +4,6 @@ import { squareSize } from "./constants"
 import { SquareState } from "./SquareState"
 
 interface Props {
-  droppable: boolean
   squareState: SquareState
 }
 
@@ -12,12 +11,14 @@ const getColor = (squareState: SquareState): string => {
   switch (squareState) {
     case SquareState.dragging:
       return "green"
+    case SquareState.droppable:
+      return "lime"
     case SquareState.idle:
       return "black"
     case SquareState.moving:
       return "red"
     case SquareState.snapping:
-      return "lime"
+      return "pink"
   }
 }
 
@@ -25,10 +26,7 @@ export const Square = (props: Props) => (
   <View
     style={{
       backgroundColor: getColor(props.squareState),
-      borderColor: "pink",
-      borderStyle: props.droppable ? "solid" : "dashed",
       borderRadius: 5,
-      borderWidth: 2,
       height: squareSize,
       width: squareSize
     }}

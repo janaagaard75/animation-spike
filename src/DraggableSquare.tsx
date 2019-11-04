@@ -112,8 +112,11 @@ export class DraggableSquare extends Component<Props, State> {
         {...this.panResponder.panHandlers}
       >
         <Square
-          droppable={this.props.hoveredPosition !== undefined}
-          squareState={this.state.visualState}
+          squareState={
+            this.props.hoveredPosition !== undefined
+              ? SquareState.droppable
+              : this.state.visualState
+          }
         ></Square>
       </Animated.View>
     )

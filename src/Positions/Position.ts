@@ -1,9 +1,10 @@
 import { squareSize } from "../constants"
+import { Coordinates } from "./Coordinates"
 
-export abstract class Position {
+export abstract class Position implements Coordinates {
   constructor(public x: number, public y: number) {}
 
-  public isHovered(position: { x: number; y: number }) {
+  public isHovered(position: Coordinates) {
     // TODO: Why does the x and y have to be reversed for this to be correct?!?
     return (
       this.y <= position.x + squareSize &&
@@ -13,7 +14,7 @@ export abstract class Position {
     )
   }
 
-  public equals(otherCoordinates: { x: number; y: number } | undefined) {
+  public equals(otherCoordinates: Coordinates | undefined) {
     if (otherCoordinates === undefined) {
       return false
     }

@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
+import { Coordinates } from "./Positions/Coordinates"
 import { Position } from "./Positions/Position"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
 
 interface Props {
   destination: Position
-  squareMoved: (position: { x: number; y: number }) => any
+  squareMoved: (position: Coordinates) => any
 }
 
 interface State {

@@ -42,11 +42,12 @@ export const MainView = () => {
         <DropZones hoveredPosition={hoveredPosition} />
         <DraggableSquare
           destination={squarePosition}
+          droppable={hoveredPosition !== undefined}
           squareMoved={position =>
             setHoveredPosition(
-              allPositions.find(namedPosition =>
-                namedPosition.isHoveringAbove(position)
-              )
+              allPositions
+                .filter(namedPosition => namedPosition !== squarePosition)
+                .find(namedPosition => namedPosition.isHoveringAbove(position))
             )
           }
         />

@@ -3,6 +3,7 @@
     "Interop",
     "codeframe",
     "draggable",
+    "droppable",
     "esnext",
     "lockfile",
     "readonly"

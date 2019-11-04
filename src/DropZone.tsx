@@ -11,6 +11,7 @@ export const DropZone = (props: { hovered: boolean; position: Position }) => (
       borderStyle: props.hovered ? "solid" : "dashed",
       borderWidth: 2,
       height: squareSize,
+      // TODO: Reverse x and y.
       left: props.position.y,
       position: "absolute",
       top: props.position.x,

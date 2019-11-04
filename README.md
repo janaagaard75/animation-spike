@@ -10,4 +10,4 @@ It turned out that it's possible to set the x and y positions directly in `onPan
 
 ## To Do
 
-- Better styling.
+- Bug: The square flashes lime when moving from one square to another because right after the move is initiated the square it left becomes a drop zone.

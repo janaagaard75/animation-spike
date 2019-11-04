@@ -4,11 +4,11 @@ import { Coordinates } from "./Coordinates"
 export abstract class Position implements Coordinates {
   constructor(public x: number, public y: number) {}
 
-  public isHovered(position: Coordinates) {
+  public isHoveringAbove(position: Coordinates) {
     return (
-      this.x <= position.x + squareSize &&
+      position.x >= this.x - squareSize &&
       position.x <= this.x + squareSize &&
-      this.y <= position.y + squareSize &&
+      position.y >= this.y - squareSize &&
       position.y <= this.y + squareSize
     )
   }

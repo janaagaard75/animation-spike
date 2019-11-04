@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
+import { MoveState } from "./MoveState"
 import { Coordinates } from "./Positions/Coordinates"
 import { Position } from "./Positions/Position"
 import { Square } from "./Square"
-import { SquareState } from "./SquareState"
 
 interface Props {
   destination: Position
@@ -11,7 +11,7 @@ interface Props {
 }
 
 interface State {
-  visualState: SquareState
+  visualState: MoveState
 }
 
 export class DraggableSquare extends Component<Props, State> {
@@ -19,7 +19,7 @@ export class DraggableSquare extends Component<Props, State> {
     super(props)
 
     this.state = {
-      visualState: SquareState.idle
+      visualState: MoveState.idle
     }
 
     this.animatedPosition = new Animated.ValueXY(props.destination)
@@ -28,7 +28,7 @@ export class DraggableSquare extends Component<Props, State> {
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
       onPanResponderGrant: (_e, _gestureState) => {
         this.setState({
-          visualState: SquareState.dragging
+          visualState: MoveState.dragging
         })
       },
       onPanResponderMove: (_e, gestureState) => {
@@ -39,7 +39,7 @@ export class DraggableSquare extends Component<Props, State> {
       },
       onPanResponderEnd: (_e, _gestureState) => {
         this.setState({
-          visualState: SquareState.snapping
+          visualState: MoveState.snapping
         })
 
         Animated.spring(this.animatedPosition, {
@@ -53,7 +53,7 @@ export class DraggableSquare extends Component<Props, State> {
           useNativeDriver: true
         }).start(() => {
           this.setState({
-            visualState: SquareState.idle
+            visualState: MoveState.idle
           })
         })
       }
@@ -76,7 +76,7 @@ export class DraggableSquare extends Component<Props, State> {
     }
 
     this.setState({
-      visualState: SquareState.moving
+      visualState: MoveState.moving
     })
     this.queuedMoves++
 
@@ -90,7 +90,7 @@ export class DraggableSquare extends Component<Props, State> {
       this.queuedMoves--
       if (this.queuedMoves === 0) {
         this.setState({
-          visualState: SquareState.idle
+          visualState: MoveState.idle
         })
       }
     })

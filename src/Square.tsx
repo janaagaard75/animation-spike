@@ -1,22 +1,22 @@
 import React from "react"
 import { View } from "react-native"
 import { squareSize } from "./constants"
-import { MoveState } from "./MoveState"
+import { SquareState } from "./SquareState"
 
 interface Props {
   droppable: boolean
-  squareState: MoveState
+  squareState: SquareState
 }
 
-const getColor = (squareState: MoveState): string => {
+const getColor = (squareState: SquareState): string => {
   switch (squareState) {
-    case MoveState.dragging:
+    case SquareState.dragging:
       return "green"
-    case MoveState.idle:
+    case SquareState.idle:
       return "black"
-    case MoveState.moving:
+    case SquareState.moving:
       return "red"
-    case MoveState.snapping:
+    case SquareState.snapping:
       return "lime"
   }
 }

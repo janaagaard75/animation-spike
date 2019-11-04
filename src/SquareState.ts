@@ -1,4 +1,4 @@
-export enum MoveState {
+export enum SquareState {
   dragging,
   idle,
   moving,

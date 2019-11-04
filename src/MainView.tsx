@@ -42,6 +42,14 @@ export const MainView = () => {
         <DropZones hoveredPosition={hoveredPosition} />
         <DraggableSquare
           destination={squarePosition}
+          dropped={() => {
+            if (hoveredPosition === undefined) {
+              throw new Error(
+                "Trying to drop, but the hovered position isn't defined."
+              )
+            }
+            setSquarePosition(hoveredPosition)
+          }}
           droppable={hoveredPosition !== undefined}
           squareMoved={position =>
             setHoveredPosition(

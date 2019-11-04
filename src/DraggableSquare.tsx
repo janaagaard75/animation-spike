@@ -8,6 +8,7 @@ import { Square } from "./Square"
 interface Props {
   destination: Position
   droppable: boolean
+  dropped: () => any
   squareMoved: (position: Coordinates) => any
 }
 
@@ -39,6 +40,11 @@ export class DraggableSquare extends Component<Props, State> {
         })
       },
       onPanResponderEnd: (_e, _gestureState) => {
+        if (this.props.droppable) {
+          this.props.dropped()
+          return
+        }
+
         this.setState({
           visualState: MoveState.snapping
         })

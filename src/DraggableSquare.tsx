@@ -7,8 +7,8 @@ import { Square } from "./Square"
 
 interface Props {
   destination: Position
-  droppable: boolean
-  dropped: () => any
+  dropped: (dropPosition: Position) => any
+  hoveredPosition: Position | undefined
   squareMoved: (position: Coordinates) => any
 }
 
@@ -40,8 +40,8 @@ export class DraggableSquare extends Component<Props, State> {
         })
       },
       onPanResponderEnd: (_e, _gestureState) => {
-        if (this.props.droppable) {
-          this.props.dropped()
+        if (this.props.hoveredPosition !== undefined) {
+          this.props.dropped(this.props.hoveredPosition)
           return
         }
 
@@ -112,7 +112,7 @@ export class DraggableSquare extends Component<Props, State> {
         {...this.panResponder.panHandlers}
       >
         <Square
-          droppable={this.props.droppable}
+          droppable={this.props.hoveredPosition !== undefined}
           squareState={this.state.visualState}
         ></Square>
       </Animated.View>

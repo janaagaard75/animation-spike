@@ -38,6 +38,15 @@ export class DraggableSquare extends Component<Props, State> {
           x: this.props.destination.x + gestureState.dx,
           y: this.props.destination.y + gestureState.dy
         })
+        const visualStateAfterMove =
+          this.props.hoveredPosition === undefined
+            ? SquareState.dragging
+            : SquareState.droppable
+        if (visualStateAfterMove !== this.state.visualState) {
+          this.setState({
+            visualState: visualStateAfterMove
+          })
+        }
       },
       onPanResponderEnd: (_e, _gestureState) => {
         if (this.props.hoveredPosition !== undefined) {
@@ -111,15 +120,7 @@ export class DraggableSquare extends Component<Props, State> {
         }}
         {...this.panResponder.panHandlers}
       >
-        <Square
-          squareState={
-            // TODO: Clean up the square state code.
-            this.state.visualState === SquareState.dragging &&
-            this.props.hoveredPosition !== undefined
-              ? SquareState.droppable
-              : this.state.visualState
-          }
-        ></Square>
+        <Square squareState={this.state.visualState}></Square>
       </Animated.View>
     )
   }

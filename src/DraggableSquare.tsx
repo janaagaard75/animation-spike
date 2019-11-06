@@ -113,6 +113,8 @@ export class DraggableSquare extends Component<Props, State> {
       >
         <Square
           squareState={
+            // TODO: Clean up the square state code.
+            this.state.visualState === SquareState.dragging &&
             this.props.hoveredPosition !== undefined
               ? SquareState.droppable
               : this.state.visualState

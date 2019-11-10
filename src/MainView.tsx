@@ -3,7 +3,6 @@ import { Button, View } from "react-native"
 import { DraggableSquare } from "./DraggableSquare"
 import { DropZones } from "./DropZones"
 import { Field } from "./Field"
-import { allPositions } from "./Positions/allPositions"
 import { Position } from "./Positions/Position"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
@@ -11,7 +10,9 @@ const getRandomInteger = (minimum: number, maximum: number): number => {
 }
 
 const getRandomPosition = (): Position => {
-  return allPositions[getRandomInteger(0, allPositions.length - 1)]
+  return Position.allPositions[
+    getRandomInteger(0, Position.allPositions.length - 1)
+  ]
 }
 
 const getNewRandomPosition = (currentPosition: Position): Position => {
@@ -46,7 +47,7 @@ export const MainView = () => {
           hoveredPosition={hoveredPosition}
           squareMoved={position =>
             setHoveredPosition(
-              allPositions
+              Position.allPositions
                 .filter(pos => pos !== squarePosition)
                 .find(pos => pos.isHoveringAbove(position))
             )

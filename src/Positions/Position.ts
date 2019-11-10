@@ -20,4 +20,14 @@ export class Position implements Coordinates {
 
     return this.x === otherCoordinates.x && this.y === otherCoordinates.y
   }
+
+  public static readonly allPositions: Array<Position> = [
+    new Position(0, 0),
+    new Position(Constants.fieldSize - Constants.squareSize, 0),
+    new Position(0, Constants.fieldSize - Constants.squareSize),
+    new Position(
+      Constants.fieldSize - Constants.squareSize,
+      Constants.fieldSize - Constants.squareSize
+    )
+  ]
 }

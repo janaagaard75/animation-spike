@@ -2,7 +2,6 @@ import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
 import { DropZone } from "./DropZone"
-import { allPositions } from "./Positions/allPositions"
 import { Position } from "./Positions/Position"
 
 export const DropZones = (props: { hoveredPosition: Position | undefined }) => {
@@ -14,7 +13,7 @@ export const DropZones = (props: { hoveredPosition: Position | undefined }) => {
         width: Constants.fieldSize
       }}
     >
-      {allPositions.map((position, index) => (
+      {Position.allPositions.map((position, index) => (
         <DropZone
           hovered={position.equals(props.hoveredPosition)}
           position={position}

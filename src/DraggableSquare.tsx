@@ -7,9 +7,9 @@ import { SquareState } from "./SquareState"
 
 interface Props {
   destination: Position
-  dropped: (dropPosition: Position) => any
+  dropped: (dropPosition: Position) => void
   hoveredPosition: Position | undefined
-  squareMoved: (position: Coordinates) => any
+  squareMoved: (position: Coordinates) => void
 }
 
 interface State {

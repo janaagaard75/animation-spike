@@ -1,7 +1,7 @@
 import { squareSize } from "../constants"
 import { Coordinates } from "./Coordinates"
 
-export abstract class Position implements Coordinates {
+export class Position implements Coordinates {
   constructor(public x: number, public y: number) {}
 
   public isHoveringAbove(position: Coordinates) {

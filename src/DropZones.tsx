@@ -2,7 +2,7 @@ import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
 import { DropZone } from "./DropZone"
-import { Position } from "./Positions/Position"
+import { Position } from "./Position"
 
 export const DropZones = (props: { hoveredPosition: Position | undefined }) => {
   return (

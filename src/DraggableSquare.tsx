@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
-import { Coordinates } from "./Positions/Coordinates"
-import { Position } from "./Positions/Position"
+import { Coordinates } from "./Coordinates"
+import { Position } from "./Position"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
 

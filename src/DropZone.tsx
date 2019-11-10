@@ -1,7 +1,7 @@
 import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
-import { Position } from "./Positions/Position"
+import { Position } from "./Position"
 
 export const DropZone = (props: { hovered: boolean; position: Position }) => (
   <View

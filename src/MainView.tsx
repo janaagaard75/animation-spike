@@ -3,7 +3,7 @@ import { Button, View } from "react-native"
 import { DraggableSquare } from "./DraggableSquare"
 import { DropZones } from "./DropZones"
 import { Field } from "./Field"
-import { Position } from "./Positions/Position"
+import { Position } from "./Position"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum

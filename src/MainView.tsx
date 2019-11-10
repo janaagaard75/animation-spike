@@ -47,8 +47,8 @@ export const MainView = () => {
           squareMoved={position =>
             setHoveredPosition(
               allPositions
-                .filter(namedPosition => namedPosition !== squarePosition)
-                .find(namedPosition => namedPosition.isHoveringAbove(position))
+                .filter(pos => pos !== squarePosition)
+                .find(pos => pos.isHoveringAbove(position))
             )
           }
         />

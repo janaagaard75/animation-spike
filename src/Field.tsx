@@ -1,12 +1,12 @@
 import React, { FunctionComponent, ReactNode } from "react"
 import { View } from "react-native"
-import { fieldSize } from "./constants"
+import { Constants } from "./constants1"
 
 export const Field: FunctionComponent = (props: { children: ReactNode }) => (
   <View
     style={{
-      height: fieldSize,
-      width: fieldSize
+      height: Constants.fieldSize,
+      width: Constants.fieldSize
     }}
   >
     {props.children}

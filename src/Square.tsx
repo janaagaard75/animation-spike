@@ -1,6 +1,6 @@
 import React from "react"
 import { View } from "react-native"
-import { squareSize } from "./constants"
+import { Constants } from "./constants1"
 import { SquareState } from "./SquareState"
 
 interface Props {
@@ -27,8 +27,8 @@ export const Square = (props: Props) => (
     style={{
       backgroundColor: getColor(props.squareState),
       borderRadius: 5,
-      height: squareSize,
-      width: squareSize
+      height: Constants.squareSize,
+      width: Constants.squareSize
     }}
   />
 )

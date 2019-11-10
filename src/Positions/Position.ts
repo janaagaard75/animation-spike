@@ -1,4 +1,4 @@
-import { squareSize } from "../constants"
+import { Constants } from "../constants1"
 import { Coordinates } from "./Coordinates"
 
 export class Position implements Coordinates {
@@ -6,10 +6,10 @@ export class Position implements Coordinates {
 
   public isHoveringAbove(position: Coordinates) {
     return (
-      position.x >= this.x - squareSize &&
-      position.x <= this.x + squareSize &&
-      position.y >= this.y - squareSize &&
-      position.y <= this.y + squareSize
+      position.x >= this.x - Constants.squareSize &&
+      position.x <= this.x + Constants.squareSize &&
+      position.y >= this.y - Constants.squareSize &&
+      position.y <= this.y + Constants.squareSize
     )
   }
 

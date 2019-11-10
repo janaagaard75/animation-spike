@@ -1,4 +1,4 @@
-import { Constants } from "../constants1"
+import { Constants } from "../Constants"
 import { Coordinates } from "./Coordinates"
 
 export class Position implements Coordinates {

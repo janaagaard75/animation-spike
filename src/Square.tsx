@@ -1,6 +1,6 @@
 import React from "react"
 import { View } from "react-native"
-import { Constants } from "./constants1"
+import { Constants } from "./Constants"
 import { SquareState } from "./SquareState"
 
 interface Props {

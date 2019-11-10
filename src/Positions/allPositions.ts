@@ -1,4 +1,4 @@
-import { Constants } from "../constants1"
+import { Constants } from "../Constants"
 import { Position } from "./Position"
 
 export const allPositions: Array<Position> = [

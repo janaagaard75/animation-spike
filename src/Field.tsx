@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from "react"
 import { View } from "react-native"
-import { Constants } from "./constants1"
+import { Constants } from "./Constants"
 
 export const Field: FunctionComponent = (props: { children: ReactNode }) => (
   <View

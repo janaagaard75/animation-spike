@@ -2,9 +2,9 @@ import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
 import { DropZone } from "./DropZone"
-import { Position } from "./Position"
+import { Tile } from "./Tile"
 
-export const DropZones = (props: { hoveredPosition: Position | undefined }) => {
+export const DropZones = (props: { hoveredTile: Tile | undefined }) => {
   return (
     <View
       style={{
@@ -13,10 +13,10 @@ export const DropZones = (props: { hoveredPosition: Position | undefined }) => {
         width: Constants.fieldSize
       }}
     >
-      {Position.allPositions.map((position, index) => (
+      {Tile.allTiles.map((tile, index) => (
         <DropZone
-          hovered={position.equals(props.hoveredPosition)}
-          position={position}
+          hovered={tile.equals(props.hoveredTile)}
+          tile={tile}
           key={index}
         />
       ))}

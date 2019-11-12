@@ -3,32 +3,28 @@ import { Button, View } from "react-native"
 import { DraggableSquare } from "./DraggableSquare"
 import { DropZones } from "./DropZones"
 import { Field } from "./Field"
-import { Position } from "./Position"
+import { Tile } from "./Tile"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
 }
 
-const getRandomPosition = (): Position => {
-  return Position.allPositions[
-    getRandomInteger(0, Position.allPositions.length - 1)
-  ]
+const getRandomTile = (): Tile => {
+  return Tile.allTiles[getRandomInteger(0, Tile.allTiles.length - 1)]
 }
 
-const getNewRandomPosition = (currentPosition: Position): Position => {
+const getNewRandomTile = (currentTile: Tile): Tile => {
   for (;;) {
-    const newPosition = getRandomPosition()
-    if (newPosition !== currentPosition) {
-      return newPosition
+    const newTile = getRandomTile()
+    if (newTile !== currentTile) {
+      return newTile
     }
   }
 }
 
 export const MainView = () => {
-  const [squarePosition, setSquarePosition] = useState(getRandomPosition())
-  const [hoveredPosition, setHoveredPosition] = useState<Position | undefined>(
-    undefined
-  )
+  const [currentTile, setCurrentTile] = useState(getRandomTile())
+  const [hoveredTile, setHoveredTile] = useState<Tile | undefined>(undefined)
 
   return (
     <View
@@ -40,16 +36,16 @@ export const MainView = () => {
       }}
     >
       <Field>
-        <DropZones hoveredPosition={hoveredPosition} />
+        <DropZones hoveredTile={hoveredTile} />
         <DraggableSquare
-          destination={squarePosition}
-          dropped={dropPosition => setSquarePosition(dropPosition)}
-          hoveredPosition={hoveredPosition}
-          squareMoved={position =>
-            setHoveredPosition(
-              Position.allPositions
-                .filter(pos => pos !== squarePosition)
-                .find(pos => pos.isHoveringAbove(position))
+          destination={currentTile}
+          droppedOnTile={tile => setCurrentTile(tile)}
+          hoveredTile={hoveredTile}
+          squareMoved={topLeftCoordinates =>
+            setHoveredTile(
+              Tile.allTiles
+                .filter(tile => tile !== currentTile)
+                .find(tile => tile.isHoveringAbove(topLeftCoordinates))
             )
           }
         />
@@ -60,9 +56,7 @@ export const MainView = () => {
         }}
       >
         <Button
-          onPress={() =>
-            setSquarePosition(getNewRandomPosition(squarePosition))
-          }
+          onPress={() => setCurrentTile(getNewRandomTile(currentTile))}
           title="Move square"
         />
       </View>

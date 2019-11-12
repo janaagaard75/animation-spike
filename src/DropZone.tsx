@@ -1,9 +1,9 @@
 import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
-import { Position } from "./Position"
+import { Tile } from "./Tile"
 
-export const DropZone = (props: { hovered: boolean; position: Position }) => (
+export const DropZone = (props: { hovered: boolean; tile: Tile }) => (
   <View
     style={{
       borderColor: "red",
@@ -11,9 +11,9 @@ export const DropZone = (props: { hovered: boolean; position: Position }) => (
       borderStyle: props.hovered ? "solid" : "dashed",
       borderWidth: 2,
       height: Constants.squareSize,
-      left: props.position.x,
+      left: props.tile.x,
       position: "absolute",
-      top: props.position.y,
+      top: props.tile.y,
       width: Constants.squareSize
     }}
   />

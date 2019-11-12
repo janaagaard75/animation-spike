@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 import { Animated, PanResponder, PanResponderInstance } from "react-native"
 import { Coordinates } from "./Coordinates"
-import { Position } from "./Position"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
+import { Tile } from "./Tile"
 
 interface Props {
-  destination: Position
-  dropped: (dropPosition: Position) => void
-  hoveredPosition: Position | undefined
-  squareMoved: (position: Coordinates) => void
+  destination: Tile
+  droppedOnTile: (tile: Tile) => void
+  hoveredTile: Tile | undefined
+  squareMoved: (topLeftCoordinates: Coordinates) => void
 }
 
 interface State {
@@ -24,7 +24,7 @@ export class DraggableSquare extends Component<Props, State> {
       visualState: SquareState.idle
     }
 
-    this.animatedPosition = new Animated.ValueXY(props.destination)
+    this.animatedTopLeftCoordinates = new Animated.ValueXY(props.destination)
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (_e, _gestureState) => true,
@@ -34,12 +34,12 @@ export class DraggableSquare extends Component<Props, State> {
         })
       },
       onPanResponderMove: (_e, gestureState) => {
-        this.animatedPosition.setValue({
+        this.animatedTopLeftCoordinates.setValue({
           x: this.props.destination.x + gestureState.dx,
           y: this.props.destination.y + gestureState.dy
         })
         const visualStateAfterMove =
-          this.props.hoveredPosition === undefined
+          this.props.hoveredTile === undefined
             ? SquareState.dragging
             : SquareState.droppable
         if (visualStateAfterMove !== this.state.visualState) {
@@ -49,8 +49,8 @@ export class DraggableSquare extends Component<Props, State> {
         }
       },
       onPanResponderEnd: (_e, _gestureState) => {
-        if (this.props.hoveredPosition !== undefined) {
-          this.props.dropped(this.props.hoveredPosition)
+        if (this.props.hoveredTile !== undefined) {
+          this.props.droppedOnTile(this.props.hoveredTile)
           return
         }
 
@@ -58,7 +58,7 @@ export class DraggableSquare extends Component<Props, State> {
           visualState: SquareState.snapping
         })
 
-        Animated.spring(this.animatedPosition, {
+        Animated.spring(this.animatedTopLeftCoordinates, {
           bounciness: 3,
           restDisplacementThreshold: 2,
           restSpeedThreshold: 2,
@@ -77,12 +77,12 @@ export class DraggableSquare extends Component<Props, State> {
 
     this.queuedMoves = 0
 
-    this.animatedPosition.addListener(position =>
-      this.props.squareMoved(position)
+    this.animatedTopLeftCoordinates.addListener(coordinates =>
+      this.props.squareMoved(coordinates)
     )
   }
 
-  private animatedPosition: Animated.ValueXY
+  private animatedTopLeftCoordinates: Animated.ValueXY
   private panResponder: PanResponderInstance
   private queuedMoves: number
 
@@ -96,7 +96,7 @@ export class DraggableSquare extends Component<Props, State> {
     })
     this.queuedMoves++
 
-    Animated.spring(this.animatedPosition, {
+    Animated.spring(this.animatedTopLeftCoordinates, {
       bounciness: 3,
       restDisplacementThreshold: 2,
       restSpeedThreshold: 2,
@@ -116,7 +116,7 @@ export class DraggableSquare extends Component<Props, State> {
     return (
       <Animated.View
         style={{
-          transform: this.animatedPosition.getTranslateTransform()
+          transform: this.animatedTopLeftCoordinates.getTranslateTransform()
         }}
         {...this.panResponder.panHandlers}
       >

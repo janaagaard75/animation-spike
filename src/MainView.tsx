@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Button, View } from "react-native"
 import { DraggableSquare } from "./DraggableSquare"
-import { DropZones } from "./DropZones"
 import { Field } from "./Field"
 import { Tile } from "./Tile"
+import { Tiles } from "./Tiles"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
@@ -36,7 +36,7 @@ export const MainView = () => {
       }}
     >
       <Field>
-        <DropZones hoveredTile={hoveredTile} />
+        <Tiles hoveredTile={hoveredTile} />
         <DraggableSquare
           destination={currentTile}
           droppedOnTile={tile => setCurrentTile(tile)}

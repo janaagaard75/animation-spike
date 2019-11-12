@@ -3,7 +3,7 @@ import { View } from "react-native"
 import { Constants } from "./Constants"
 import { Tile } from "./Tile"
 
-export const DropZone = (props: { hovered: boolean; tile: Tile }) => (
+export const TileView = (props: { hovered: boolean; tile: Tile }) => (
   <View
     style={{
       borderColor: "red",

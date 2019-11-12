@@ -1,10 +1,10 @@
 import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
-import { DropZone } from "./DropZone"
 import { Tile } from "./Tile"
+import { TileView } from "./TileView"
 
-export const DropZones = (props: { hoveredTile: Tile | undefined }) => {
+export const Tiles = (props: { hoveredTile: Tile | undefined }) => {
   return (
     <View
       style={{
@@ -14,7 +14,7 @@ export const DropZones = (props: { hoveredTile: Tile | undefined }) => {
       }}
     >
       {Tile.allTiles.map((tile, index) => (
-        <DropZone
+        <TileView
           hovered={tile.equals(props.hoveredTile)}
           tile={tile}
           key={index}

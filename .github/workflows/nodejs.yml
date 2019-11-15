@@ -1,4 +1,4 @@
-name: Node CI
+name: Validate TypeScript code
 
 on: [push]
 

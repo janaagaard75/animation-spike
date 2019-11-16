@@ -3,7 +3,7 @@ import { View } from "react-native"
 import { Constants } from "./Constants"
 import { TileInfo } from "./TileInfo"
 
-export const TileView = (props: { hovered: boolean; tile: TileInfo }) => (
+export const Tile = (props: { hovered: boolean; tile: TileInfo }) => (
   <View
     style={{
       borderColor: "red",

@@ -1,8 +1,8 @@
 import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
+import { Tile } from "./Tile"
 import { TileInfo } from "./TileInfo"
-import { TileView } from "./TileView"
 
 export const Tiles = (props: { hoveredTile: TileInfo | undefined }) => {
   return (
@@ -14,7 +14,7 @@ export const Tiles = (props: { hoveredTile: TileInfo | undefined }) => {
       }}
     >
       {TileInfo.allTiles.map((tile, index) => (
-        <TileView
+        <Tile
           hovered={tile.equals(props.hoveredTile)}
           tile={tile}
           key={index}

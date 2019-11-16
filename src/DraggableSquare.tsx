@@ -3,12 +3,12 @@ import { Animated, PanResponder, PanResponderInstance } from "react-native"
 import { Coordinates } from "./Coordinates"
 import { Square } from "./Square"
 import { SquareState } from "./SquareState"
-import { Tile } from "./Tile"
+import { TileInfo } from "./TileInfo"
 
 interface Props {
-  destination: Tile
-  droppedOnTile: (tile: Tile) => void
-  hoveredTile: Tile | undefined
+  destination: TileInfo
+  droppedOnTile: (tile: TileInfo) => void
+  hoveredTile: TileInfo | undefined
   squareMoved: (topLeftCoordinates: Coordinates) => void
 }
 

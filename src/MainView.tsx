@@ -2,18 +2,18 @@ import React, { useState } from "react"
 import { Button, View } from "react-native"
 import { DraggableSquare } from "./DraggableSquare"
 import { Field } from "./Field"
-import { Tile } from "./Tile"
+import { TileInfo } from "./TileInfo"
 import { Tiles } from "./Tiles"
 
 const getRandomInteger = (minimum: number, maximum: number): number => {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
 }
 
-const getRandomTile = (): Tile => {
-  return Tile.allTiles[getRandomInteger(0, Tile.allTiles.length - 1)]
+const getRandomTile = (): TileInfo => {
+  return TileInfo.allTiles[getRandomInteger(0, TileInfo.allTiles.length - 1)]
 }
 
-const getNewRandomTile = (currentTile: Tile): Tile => {
+const getNewRandomTile = (currentTile: TileInfo): TileInfo => {
   for (;;) {
     const newTile = getRandomTile()
     if (newTile !== currentTile) {
@@ -24,7 +24,9 @@ const getNewRandomTile = (currentTile: Tile): Tile => {
 
 export const MainView = () => {
   const [currentTile, setCurrentTile] = useState(getRandomTile())
-  const [hoveredTile, setHoveredTile] = useState<Tile | undefined>(undefined)
+  const [hoveredTile, setHoveredTile] = useState<TileInfo | undefined>(
+    undefined
+  )
 
   return (
     <View
@@ -43,7 +45,7 @@ export const MainView = () => {
           hoveredTile={hoveredTile}
           squareMoved={topLeftCoordinates =>
             setHoveredTile(
-              Tile.allTiles
+              TileInfo.allTiles
                 .filter(tile => tile !== currentTile)
                 .find(tile => tile.isHoveringAbove(topLeftCoordinates))
             )

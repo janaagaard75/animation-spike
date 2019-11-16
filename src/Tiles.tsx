@@ -1,10 +1,10 @@
 import React from "react"
 import { View } from "react-native"
 import { Constants } from "./Constants"
-import { Tile } from "./Tile"
+import { TileInfo } from "./TileInfo"
 import { TileView } from "./TileView"
 
-export const Tiles = (props: { hoveredTile: Tile | undefined }) => {
+export const Tiles = (props: { hoveredTile: TileInfo | undefined }) => {
   return (
     <View
       style={{
@@ -13,7 +13,7 @@ export const Tiles = (props: { hoveredTile: Tile | undefined }) => {
         width: Constants.fieldSize
       }}
     >
-      {Tile.allTiles.map((tile, index) => (
+      {TileInfo.allTiles.map((tile, index) => (
         <TileView
           hovered={tile.equals(props.hoveredTile)}
           tile={tile}

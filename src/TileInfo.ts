@@ -1,7 +1,7 @@
 import { Constants } from "./Constants"
 import { Coordinates } from "./Coordinates"
 
-export class Tile implements Coordinates {
+export class TileInfo implements Coordinates {
   constructor(public x: number, public y: number) {}
 
   public isHoveringAbove(topLeftOfTile: Coordinates) {
@@ -21,11 +21,11 @@ export class Tile implements Coordinates {
     return this.x === otherCoordinates.x && this.y === otherCoordinates.y
   }
 
-  public static readonly allTiles: Array<Tile> = [
-    new Tile(0, 0),
-    new Tile(Constants.fieldSize - Constants.squareSize, 0),
-    new Tile(0, Constants.fieldSize - Constants.squareSize),
-    new Tile(
+  public static readonly allTiles: Array<TileInfo> = [
+    new TileInfo(0, 0),
+    new TileInfo(Constants.fieldSize - Constants.squareSize, 0),
+    new TileInfo(0, Constants.fieldSize - Constants.squareSize),
+    new TileInfo(
       Constants.fieldSize - Constants.squareSize,
       Constants.fieldSize - Constants.squareSize
     )

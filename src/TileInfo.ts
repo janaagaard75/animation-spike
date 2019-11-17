@@ -2,7 +2,13 @@ import { Constants } from "./Constants"
 import { Coordinates } from "./Coordinates"
 
 export class TileInfo implements Coordinates {
-  constructor(public x: number, public y: number) {}
+  constructor(coordinates: Coordinates) {
+    this.x = coordinates.x
+    this.y = coordinates.y
+  }
+
+  public x: number
+  public y: number
 
   public isHoveringAbove(topLeftOfTile: Coordinates) {
     return (
@@ -22,12 +28,14 @@ export class TileInfo implements Coordinates {
   }
 
   public static readonly allTiles: Array<TileInfo> = [
-    new TileInfo(0, 0),
-    new TileInfo(Constants.fieldSize - Constants.squareSize, 0),
-    new TileInfo(0, Constants.fieldSize - Constants.squareSize),
-    new TileInfo(
-      Constants.fieldSize - Constants.squareSize,
-      Constants.fieldSize - Constants.squareSize
-    )
-  ]
+    ...Array(Constants.rows * Constants.columns).keys()
+  ].map(
+    i =>
+      new TileInfo({
+        x: ((i % Constants.columns) * Constants.fieldSize) / Constants.columns,
+        y:
+          (Math.floor(i / Constants.rows) * Constants.fieldSize) /
+          Constants.rows
+      })
+  )
 }

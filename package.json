@@ -19,23 +19,23 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "35.0.0",
+    "expo": "35.0.1",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
   },
   "devDependencies": {
     "@types/react": "16.8.25",
-    "@types/react-native": "0.60.21",
-    "@typescript-eslint/eslint-plugin": "2.5.0",
-    "@typescript-eslint/parser": "2.5.0",
+    "@types/react-native": "0.60.22",
+    "@typescript-eslint/eslint-plugin": "2.7.0",
+    "@typescript-eslint/parser": "2.7.0",
     "babel-preset-expo": "7.1.0",
     "eslint": "6.6.0",
-    "eslint-config-prettier": "6.5.0",
+    "eslint-config-prettier": "6.6.0",
     "eslint-plugin-prettier": "3.1.1",
     "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-hooks": "2.2.0",
-    "expo-cli": "3.4.1",
-    "prettier": "1.18.2",
-    "typescript": "3.6.4"
+    "eslint-plugin-react-hooks": "2.3.0",
+    "expo-cli": "3.8.0",
+    "prettier": "1.19.1",
+    "typescript": "3.7.2"
   }
 }

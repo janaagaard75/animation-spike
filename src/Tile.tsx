@@ -9,7 +9,7 @@ export const Tile = (props: { hovered: boolean; tile: TileInfo }) => (
       borderColor: "red",
       borderRadius: 5,
       borderStyle: props.hovered ? "solid" : "dashed",
-      borderWidth: 2,
+      borderWidth: 1,
       height: Constants.squareSize,
       left: props.tile.x,
       position: "absolute",

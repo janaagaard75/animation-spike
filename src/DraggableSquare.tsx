@@ -116,6 +116,7 @@ export class DraggableSquare extends Component<Props, State> {
     return (
       <Animated.View
         style={{
+          position: "absolute",
           transform: this.animatedTopLeftCoordinates.getTranslateTransform()
         }}
         {...this.panResponder.panHandlers}

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Button, View } from "react-native"
-import { DraggableSquare } from "./DraggableSquare"
+import { Constants } from "./Constants"
+import { DraggableSquares } from "./DraggableSquares"
 import { Field } from "./Field"
 import { TileInfo } from "./TileInfo"
 import { Tiles } from "./Tiles"
@@ -13,20 +14,17 @@ const getRandomTile = (): TileInfo => {
   return TileInfo.allTiles[getRandomInteger(0, TileInfo.allTiles.length - 1)]
 }
 
-const getNewRandomTile = (currentTile: TileInfo): TileInfo => {
-  for (;;) {
-    const newTile = getRandomTile()
-    if (newTile !== currentTile) {
-      return newTile
-    }
-  }
+const getRandomTiles = (numberOfTiles: number): Array<TileInfo> => {
+  return [...Array(numberOfTiles).keys()].map(() => getRandomTile())
 }
 
 export const MainView = () => {
-  const [currentTile, setCurrentTile] = useState(getRandomTile())
-  const [hoveredTile, setHoveredTile] = useState<TileInfo | undefined>(
-    undefined
+  const [currentTiles, setCurrentTiles] = useState(
+    getRandomTiles(Constants.numberOfSquares)
   )
+  // const [hoveredTile, setHoveredTile] = useState<TileInfo | undefined>(
+  //   undefined
+  // )
 
   return (
     <View
@@ -38,8 +36,8 @@ export const MainView = () => {
       }}
     >
       <Field>
-        <Tiles hoveredTile={hoveredTile} />
-        <DraggableSquare
+        <Tiles hoveredTile={undefined} />
+        {/* <DraggableSquare
           destination={currentTile}
           droppedOnTile={tile => setCurrentTile(tile)}
           hoveredTile={hoveredTile}
@@ -50,6 +48,11 @@ export const MainView = () => {
                 .find(tile => tile.isHoveringAbove(topLeftCoordinates))
             )
           }
+        /> */}
+        <DraggableSquares
+          currentTiles={currentTiles}
+          droppedOnTile={_tile => {}}
+          squareMoved={_topLeftCoordinates => {}}
         />
       </Field>
       <View
@@ -58,8 +61,10 @@ export const MainView = () => {
         }}
       >
         <Button
-          onPress={() => setCurrentTile(getNewRandomTile(currentTile))}
-          title="Move square"
+          onPress={() =>
+            setCurrentTiles(getRandomTiles(Constants.numberOfSquares))
+          }
+          title="Move squares"
         />
       </View>
     </View>

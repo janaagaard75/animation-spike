@@ -105,6 +105,7 @@ export class DraggableSquare extends Component<Props, State> {
     }).start(() => {
       this.queuedMoves--
       if (this.queuedMoves === 0) {
+        // TODO: Could the state be elevated, so that it would be synchronous across all the squares?
         this.setState({
           visualState: SquareState.idle
         })
